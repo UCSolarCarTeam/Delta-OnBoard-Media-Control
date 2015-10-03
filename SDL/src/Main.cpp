@@ -1,9 +1,9 @@
-
 #include <cv.h>
 #include "opencv2/opencv.hpp"
 #include "SongLoader.h"
 #include "SongPlayer.h"
 #include "videoStream.hpp"
+#include "Benchmark.hpp"
 
 //for the rasperry pi
 #ifndef INT64_C
@@ -183,6 +183,7 @@ void signalToQuit()
 {
     backupCamera.signalToQuit();
     musicPlayer.songQuit();
+    quit = 1;
 }
 
 /* Cleans up and should free everything used in the program*/
@@ -194,13 +195,13 @@ void close()
     window = NULL;
     renderer = NULL;
     SDL_Quit();
-    exit(0);
 }
 
 int main(int argc, char* argv[])
 {
-    clock_t t;
 
+    Benchmark ProcessBenchmark = Benchmark("ProcessBenchmark");
+    Benchmark FullLoop = Benchmark("FullLoop");
     if (!init_SDL())
     {
         fprintf(stderr, "Could not initialize SDL!\n");
@@ -224,20 +225,21 @@ int main(int argc, char* argv[])
 
     while (!quit)
     {
+        FullLoop.StartTimer();
+        ProcessBenchmark.StartTimer();
         processEvents();
+        ProcessBenchmark.StopTimer();
         if (show_Camera())
         {
-            t = clock();
             SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
             SDL_RenderPresent(renderer);
             SDL_RenderClear(renderer);
-            t = clock() - t;
-            printf ("It took me %d clicks (%f seconds).\n",t,((float)t)/CLOCKS_PER_SEC);
         }
+        FullLoop.StopTimer();
     }
-    t = clock() - t;
-    printf ("It took me %d clicks (%f seconds).\n",t,((float)t)/CLOCKS_PER_SEC);
 
+    FullLoop.PrintStats();
+    ProcessBenchmark.PrintStats();
     musicPlayer.WaitForInternalThreadToExit();
     backupCamera.WaitForInternalThreadToExit();
     return 0;
