@@ -17,6 +17,7 @@ extern "C" {
 #include <iostream>
 #include <stdio.h>
 #include <unistd.h>
+#include <time.h>
 
 #ifdef __amd64__
     #ifndef RUNNINGONINTEL
@@ -198,6 +199,8 @@ void close()
 
 int main(int argc, char* argv[])
 {
+    clock_t t;
+
     if (!init_SDL())
     {
         fprintf(stderr, "Could not initialize SDL!\n");
@@ -224,11 +227,16 @@ int main(int argc, char* argv[])
         processEvents();
         if (show_Camera())
         {
+            t = clock();
             SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
             SDL_RenderPresent(renderer);
             SDL_RenderClear(renderer);
+            t = clock() - t;
+            printf ("It took me %d clicks (%f seconds).\n",t,((float)t)/CLOCKS_PER_SEC);
         }
     }
+    t = clock() - t;
+    printf ("It took me %d clicks (%f seconds).\n",t,((float)t)/CLOCKS_PER_SEC);
 
     musicPlayer.WaitForInternalThreadToExit();
     backupCamera.WaitForInternalThreadToExit();
