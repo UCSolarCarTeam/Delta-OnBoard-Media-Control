@@ -201,6 +201,7 @@ int main(int argc, char* argv[])
 {
 
     Benchmark ProcessBenchmark = Benchmark("ProcessBenchmark");
+    Benchmark FrameRate = Benchmark("FrameRate");
     Benchmark FullLoop = Benchmark("FullLoop");
     if (!init_SDL())
     {
@@ -229,8 +230,10 @@ int main(int argc, char* argv[])
         ProcessBenchmark.StartTimer();
         processEvents();
         ProcessBenchmark.StopTimer();
+        FrameRate.StartTimer(); 
         if (show_Camera())
         {
+            FrameRate.StopTimer();
             SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
             SDL_RenderPresent(renderer);
             SDL_RenderClear(renderer);
@@ -240,6 +243,7 @@ int main(int argc, char* argv[])
 
     FullLoop.PrintStats();
     ProcessBenchmark.PrintStats();
+    FrameRate.PrintStats();
     musicPlayer.WaitForInternalThreadToExit();
     backupCamera.WaitForInternalThreadToExit();
     return 0;
