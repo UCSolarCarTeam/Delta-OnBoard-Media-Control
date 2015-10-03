@@ -1,9 +1,11 @@
 #ifndef BENCHMARK_HPP
 #define BENCHMARK_HPP
 
-#include <time.h>
+//#include <ctime>
+#include <chrono>
 #include <string>
 
+using namespace std::chrono;
 
 
 class Benchmark 
@@ -15,15 +17,12 @@ class Benchmark
         void StopTimer();
         void PrintStats();
 
-
-
-
     private:
         std::string benchmarkName;
-        clock_t t;
-        clock_t totalTime;
-        clock_t tempTime;
-        int totalIterations;
+        high_resolution_clock::time_point t1;
+        high_resolution_clock::time_point t2; 
+        double totalIterations;
+        duration<double> totalTime;
         enum BenchmarkState {START,STOP};
         BenchmarkState benchmarkState;
 

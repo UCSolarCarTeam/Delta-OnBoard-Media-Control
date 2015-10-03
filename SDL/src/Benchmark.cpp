@@ -5,7 +5,9 @@ Benchmark::Benchmark(std::string name)
     benchmarkName = name;
     benchmarkState = START;
     totalIterations = 0;
-    totalTime = 0;
+    t1 = high_resolution_clock::now();
+    t2 = high_resolution_clock::now(); 
+    totalTime = duration_cast<duration<double>>(t2 - t1);
 }
 
 void Benchmark::StartTimer()
@@ -13,9 +15,8 @@ void Benchmark::StartTimer()
     switch(benchmarkState)
     {
         case STOP:
-            tempTime = clock();
             benchmarkState = START;
-            t = clock();
+            t1 = high_resolution_clock::now();
             break;
         default:
             printf("Timer: %s cannot start without being stopped first\n", benchmarkName.c_str());
@@ -29,13 +30,9 @@ void Benchmark::StopTimer()
     switch(benchmarkState)
     {
         case START:
-            tempTime = clock() - tempTime;
-            t = clock() - t;
-            //printf ("It took me %d clicks (%f seconds).\n",t,((float)t)/CLOCKS_PER_SEC);
-            totalTime += tempTime;
-            //printf("Current Ticks:%d  Time(s):%f\n", totalTime, ((float)totalTime)/CLOCKS_PER_SEC);
+            t2 = high_resolution_clock::now(); 
+            totalTime += duration_cast<duration<double>>(t2 - t1);
             totalIterations++;
-            tempTime = 0;
             benchmarkState = STOP;
             break;
         default:
@@ -47,7 +44,7 @@ void Benchmark::StopTimer()
 void Benchmark::PrintStats()
 {
     printf("-------- %s STATS --------\n", benchmarkName.c_str());
-    printf("Total Ticks:%d  Time(s):%f\n", totalTime, ((float)totalTime)/CLOCKS_PER_SEC);
-    printf("Total Iterations: %d\n", totalIterations);
-    printf("Time per call %f\n", (float)totalIterations/((float)totalTime)/CLOCKS_PER_SEC);
+    printf("Total Time: %lf\n", totalTime.count());
+    printf("Total Iterations: %lf\n", totalIterations);
+    printf("Time per call %lf\n", totalTime.count()/totalIterations);
 }
