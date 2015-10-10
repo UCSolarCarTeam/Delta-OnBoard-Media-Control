@@ -2,24 +2,28 @@
 #define MUSICBAR_H
 
 #include "SongPlayer.h"
+#include "SDL.h"
+//#include <SDL2/SDL_TTF.h>
+#include <string>
 #include <SDL2/SDL.h>
 #include <stdio.h>
 #include <SDL_ttf.h>
 #include <iostream>
 #include <sstream>
+#include <cstdlib>
+
 
 class MusicBar
 {
     SDL_Surface* surface;
-    TTF_Font *songNameFont;
-    TTF_Font *timeFont;
-    SongPlayer *mPlayer;
-    
+    SDL_Renderer* renderer;
     void drawSongName();
     void drawSongTime();  
     void drawVolumeBar();
-    std::string convertToString(int songIntTime);
+    TTF_Font *font_one;
+    TTF_Font *font_two;
     int init();
+    SongPlayer *mPlayer;
 
 public:
     void update();
@@ -27,5 +31,6 @@ public:
     SDL_Surface* returnMusicBar();
 
 };
+
 
 #endif
