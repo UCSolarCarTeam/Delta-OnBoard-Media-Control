@@ -3,8 +3,8 @@
 MusicBar::MusicBar(SongPlayer *songPlayer)
 {
     mPlayer = songPlayer;
-    int musicbarSurfaceWidth = 1080;
-    int musicbarSurfaceHeight = 64;
+    musicbarSurfaceWidth = 1080;
+    musicbarSurfaceHeight = 64;
     surface = SDL_CreateRGBSurface(0, musicbarSurfaceWidth, musicbarSurfaceHeight, 32, 0, 0, 0, 0);
     init();    
 }
@@ -14,8 +14,8 @@ int MusicBar::init()
     int songNameFontSize; 
     int timeFontSize;
     
-    songNameFontSize = 50;
-    timeFontSize = 20;
+    songNameFontSize = 45;
+    timeFontSize = 25;
     
     if (TTF_Init() !=0)
     {
@@ -24,7 +24,7 @@ int MusicBar::init()
         exit(1);
     }
 
-    songNameFont = TTF_OpenFont("assets/Trebuchet-MS.ttf", songNameFontSize);
+    songNameFont = TTF_OpenFont("assets/ant-maru.ttf", songNameFontSize);
     if (songNameFont == NULL)
     {
         fprintf(stderr, "TTF_OpenFont Failed%s\n", TTF_GetError());
@@ -54,13 +54,15 @@ void MusicBar::drawSongName()
     songName = mPlayer->currentSong();
     songStringLength = songName.length();
     songName = songName.substr(12, songStringLength - 16); // removes SongLibrary/ and .mp3 from songName
-    songChar = songName.c_str();
+    songChar = songName.c_str(); 
+    
+    // SDL CALLS // 
     
     SDL_Surface *songSurface;
-    SDL_Color songColor = {255, 255, 255}; // EDIT
-    songSurface = TTF_RenderText_Solid(songNameFont, songChar, songColor);
+    SDL_Color songColor = {255, 255, 255}; 
+    songSurface = TTF_RenderUTF8_Blended(songNameFont, songChar, songColor);
     TTF_SizeText(songNameFont, songChar, &songWidth, &songHeight);
-    SDL_Rect songLocation = {1080/2 - songWidth/2, 0, 0, 0};      // EDIT
+    SDL_Rect songLocation = {musicbarSurfaceWidth/2 - songWidth/2, musicbarSurfaceHeight/2 - songHeight/2, 0, 0};      
     SDL_BlitSurface(songSurface, NULL, surface, &songLocation);
     SDL_FreeSurface(songSurface);
 }
@@ -107,18 +109,18 @@ void MusicBar::drawSongTime()
     
     songCurrentPercent = songCurrentTime / songTotalTime; 
     songCurrentIntTime = songCurrentTime;
-    songCurrentMins = songCurrentIntTime / 60; // EDIT?
-    songCurrentSecs = songCurrentIntTime % 60; // EDIT?
+    songCurrentMins = songCurrentIntTime / 60; 
+    songCurrentSecs = songCurrentIntTime % 60;
 
     //songTotalTime = songTotalTime - songCurrentTime; // Remove to stop end time increment
     songTotalIntTime = songTotalTime;
-    songTotalMins = songTotalTime / 60; // EDIT?
-    songTotalSecs = songTotalIntTime % 60; // EDIT?
+    songTotalMins = songTotalTime / 60; 
+    songTotalSecs = songTotalIntTime % 60; 
     
     songCurrentStrMins = convertToString(songCurrentMins);
     songCurrentStrSecs = convertToString(songCurrentSecs);
     
-    if (songCurrentSecs < 10) // EDIT?
+    if (songCurrentSecs < 10) 
     {
         songCurrentStrTime = songCurrentStrMins + ":0" + 
                                 songCurrentStrSecs;
@@ -133,7 +135,7 @@ void MusicBar::drawSongTime()
     songTotalStrMins = convertToString(songTotalMins);
     songTotalStrSecs = convertToString(songTotalSecs);
     
-    if (songTotalSecs < 10) // EDIT?
+    if (songTotalSecs < 10) 
     {
         songTotalStrTime = songTotalStrMins + ":0" + songTotalStrSecs;
     }
@@ -144,25 +146,27 @@ void MusicBar::drawSongTime()
 
     songTotalCharTime =  songTotalStrTime.c_str();
     
+    // SDL CALLS//
+    
+    SDL_Color songTimeColor = {255, 255, 255};
+    
     SDL_Surface *songCurrentTimeSurface;
-    SDL_Color songCurrentTimeColor = {255, 255, 255}; // EDIT
-    songCurrentTimeSurface = TTF_RenderText_Solid(timeFont, songCurrentCharTime, songCurrentTimeColor);
-    SDL_Rect songCurrentTimeLocation = {0, 4, 0, 0}; // EDIT
+    songCurrentTimeSurface = TTF_RenderText_Blended(timeFont, songCurrentCharTime, songTimeColor);
+    SDL_Rect songCurrentTimeLocation = {0, 4, 0, 0}; 
     SDL_BlitSurface(songCurrentTimeSurface, NULL, surface, &songCurrentTimeLocation);
     SDL_FreeSurface(songCurrentTimeSurface);
     
     SDL_Surface *songTotalTimeSurface;
-    SDL_Color songTotalTimeColor = {255, 255, 255}; // EDIT
-    songTotalTimeSurface = TTF_RenderText_Solid(timeFont, songTotalCharTime, songTotalTimeColor);
+    songTotalTimeSurface = TTF_RenderText_Blended(timeFont, songTotalCharTime, songTimeColor);
     TTF_SizeText(timeFont, songTotalCharTime, &totalTimeWidth, &totalTimeHeight);
-    SDL_Rect songTotalTimeLocation = {1080 - totalTimeWidth, 4, 0}; // EDIT
+    SDL_Rect songTotalTimeLocation = {musicbarSurfaceWidth - totalTimeWidth, 4, 0}; 
     SDL_BlitSurface(songTotalTimeSurface, NULL, surface, &songTotalTimeLocation);
     SDL_FreeSurface(songTotalTimeSurface);
 
     SDL_Surface *songTimebarSurface;
-    songTimebarSurface = SDL_CreateRGBSurface(0, 0 + songCurrentPercent*1080, 3, 32, 0, 0, 0, 0); // EDIT
-    SDL_FillRect(songTimebarSurface, NULL, SDL_MapRGB(songTimebarSurface->format,0,162,255)); // EDIT
-    SDL_Rect songTimebarLocation = {0, 0, 0, 0}; // EDIT
+    songTimebarSurface = SDL_CreateRGBSurface(0, 0 + songCurrentPercent*musicbarSurfaceWidth, 3, 32, 0, 0, 0, 0); 
+    SDL_FillRect(songTimebarSurface, NULL, SDL_MapRGB(songTimebarSurface->format,0,162,255));
+    SDL_Rect songTimebarLocation = {0, 0, 0, 0};
     SDL_BlitSurface(songTimebarSurface, NULL, surface, &songTimebarLocation);
     SDL_FreeSurface(songTimebarSurface);
 }
@@ -177,65 +181,63 @@ void MusicBar::drawVolumeBar()
     songVolumeCurrent = mPlayer->getVolume();
     
     songVolumePercent = songVolumeCurrent / songVolumeMax;
-
-    // Volume Background Bar Prototype
+    
+    // Volume Background Bar
     SDL_Surface *volumeBackgroundSurface;
-    int volumeBackgroundHeight;
-    int volumeBackgroundXLocation;
-    int volumeBackgroundYLocation;
-    int i; 
+    int volumeBarHeight;
+    int volumeBarXLocation;
+    int volumeBarYLocation;
     int volumeBarNumber;
+    int i;
+    int colorGreen;
 
-    volumeBarNumber = 20;
+    volumeBarNumber = 20; 
+    volumeBarHeight = 4;
+    volumeBarXLocation = 880;
+    volumeBarYLocation = 50;
     
-    volumeBackgroundHeight = 4;
-    volumeBackgroundXLocation = 880;
-    volumeBackgroundYLocation = 50;
-    
-    for (i = 0; i < volumeBarNumber; i++) // EDIT
+    for (i = 0; i < volumeBarNumber; i++)
     {
-        volumeBackgroundSurface = SDL_CreateRGBSurface(0,4, volumeBackgroundHeight,32,0,0,0,0);
+        volumeBackgroundSurface = SDL_CreateRGBSurface(0,4, volumeBarHeight,32,0,0,0,0);
         SDL_FillRect(volumeBackgroundSurface, NULL, SDL_MapRGB(volumeBackgroundSurface->format,0,0,0));
-        SDL_Rect volumeBackgroundLocation = {volumeBackgroundXLocation,volumeBackgroundYLocation,0,0};
-        SDL_BlitSurface(volumeBackgroundSurface, NULL, surface, &volumeBackgroundLocation);
+        SDL_Rect volumeBarLocation = {volumeBarXLocation,volumeBarYLocation,0,0};
+        SDL_BlitSurface(volumeBackgroundSurface, NULL, surface, &volumeBarLocation);
         SDL_FreeSurface(volumeBackgroundSurface);
 
-        volumeBackgroundHeight += 2; // EDIT
-        volumeBackgroundXLocation += 6; // EDIT
-        volumeBackgroundYLocation -= 2; // EDIT
+        //Increments for changing bar size
+        volumeBarHeight += 2;
+        volumeBarXLocation += 6; 
+        volumeBarYLocation -= 2;
     }
 
-    // Volume Bar Prototype
+    // Volume bar
     SDL_Surface *volumeSurface;
-    int volumeHeight;
-    int volumeXLocation;
-    int volumeYLocation;
-    int colorGreen;
     
-    volumeHeight = 4;
-    volumeXLocation = 880;
-    volumeYLocation = 50;
+    volumeBarHeight = 4;
+    volumeBarXLocation = 880;
+    volumeBarYLocation = 50;
     colorGreen = 162;
     songVolumePercent = songVolumePercent * volumeBarNumber - 0.1;
 
     for (i = 0; i < songVolumePercent; i++) 
     {
-        volumeSurface = SDL_CreateRGBSurface(0,4, volumeHeight, 32,0,0,0,0); // EDIT
-        SDL_FillRect(volumeSurface, NULL, SDL_MapRGB(volumeSurface->format,255,colorGreen,0)); //EDIT
-        SDL_Rect volumeLocation = {volumeXLocation, volumeYLocation, 0, 0}; // EDIT
-        SDL_BlitSurface(volumeSurface, NULL, surface, &volumeLocation);
+        volumeSurface = SDL_CreateRGBSurface(0,4, volumeBarHeight, 32,0,0,0,0); 
+        SDL_FillRect(volumeSurface, NULL, SDL_MapRGB(volumeSurface->format,255,colorGreen,0)); 
+        SDL_Rect volumeBarLocation = {volumeBarXLocation, volumeBarYLocation, 0, 0}; 
+        SDL_BlitSurface(volumeSurface, NULL, surface, &volumeBarLocation);
         SDL_FreeSurface(volumeSurface);
     
-        volumeHeight += 2; // EDIT
-        colorGreen -= 6; // EDIT
-        volumeXLocation += 6; // EDIT
-        volumeYLocation -= 2; // EDIT
+        // Increments for changing bar size and gradient
+        volumeBarHeight += 2; 
+        colorGreen -= 6; 
+        volumeBarXLocation += 6; 
+        volumeBarYLocation -= 2; 
     }
 }
 
 void MusicBar::update()
 {
-    SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format,43,43,43)); // EDIT
+    SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format,43,43,43)); 
     drawSongName();
     drawSongTime();
     drawVolumeBar();
