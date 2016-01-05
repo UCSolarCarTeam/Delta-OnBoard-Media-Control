@@ -50,12 +50,6 @@ else
     exit 0
 fi
 
-git clone https://github.com/gypified/libmpg123.git
-cd libmpg123
-./configure
-make
-sudo make install
-cd ..
 
 apt-get update --yes
 apt-get install libcv-dev --yes
@@ -67,6 +61,13 @@ apt-get install libpulse-dev --yes
 
 apt-get install libdbus-1-dev --yes
 apt-get install libudev-dev --yes
+
+git clone https://github.com/gypified/libmpg123.git
+cd libmpg123
+./configure
+make
+sudo make install
+cd ..
 
 #SDL2.0
 wget https://www.libsdl.org/release/SDL2-2.0.3.tar.gz
