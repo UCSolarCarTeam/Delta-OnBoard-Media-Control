@@ -41,9 +41,16 @@ class BackupCamera {
 public: 
     void update();
     void close();
+    bool init();
 
 
 private:
+
+    
+    void init_SDL();
+    void init_screen_settings();
+    void process_events();
+
     SDL_Renderer *renderer_;
     SDL_Window *window_;
     GraphicsHandler graphics_handler_;
