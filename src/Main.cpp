@@ -217,9 +217,7 @@ void processEvents()
                             printf("Right arrow was Pressed!\n");
                             musicPlayer.nextSong();
                             break;
-                        case SDLK_UP:
-                            musicPlayer.changeVolume(0.02);
-                            break;
+                        case SDLK_UP: musicPlayer.changeVolume(0.02); break;
                         case SDLK_DOWN:
                             musicPlayer.changeVolume(-0.02);
                             break;
