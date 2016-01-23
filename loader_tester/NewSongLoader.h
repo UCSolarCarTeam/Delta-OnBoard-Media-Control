@@ -3,9 +3,9 @@
 #include <string>
 #include <stdlib.h>
 #include <dirent.h>
-#include <unordered_map> 
-#include <iosteam>
-#include <cassert>
+#include <errno.h>
+#include <iostream>
+#include <stdio.h>
 
 //headers for randomizing
 #include <algorithm>
@@ -14,9 +14,19 @@
 
 class SongLoader
 {
-    int counter,song,checkLibrary;
-    std::vector<std::string> container;
+private:
+    int currentSongIndex;
+    bool checkLibrary;
+    std::vector<std::string> songList;
     std::string CurrentSong;
     int readSongNames();
+    int shuffleSongs();
 
-}
+public:
+    SongLoader();
+    std::string nextSong();
+    std::string previousSong();
+    std::string crrentSong();
+    bool songExists();
+};
+#endif
