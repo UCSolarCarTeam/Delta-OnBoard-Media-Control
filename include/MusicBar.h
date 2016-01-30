@@ -43,7 +43,7 @@ private:
     SDL_Rect mainMusicBarRect_;
 
     SDL_Surface *musicbarSurface;
-    SDL_Rect musicbarRect;
+    SDL_Rect musicBarRect;
     SongPlayer *musicPlayer;
     TTF_Font *songNameFont;
     TTF_Font *timeFont;
@@ -67,7 +67,6 @@ private:
 public:
 
     void init_setting(SDL_Rect mainMusicBarRect);
-    
     MusicBar();
     MusicBar(SongPlayer *songPlayer);
     void update(GraphicsHandler *graphics_handler_);

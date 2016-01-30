@@ -1,5 +1,5 @@
 #OBJS = files to compile
-OBJS = src/main.cpp src/SongLoader.cpp src/SongPlayer.cpp src/MusicBar.cpp include/threadClass.hpp src/videoStream.cpp src/WiringPiButtons.cpp
+OBJS = src/main.cpp src/SongLoader.cpp src/SongPlayer.cpp src/MusicBar.cpp include/threadClass.hpp src/videoStream.cpp src/WiringPiButtons.cpp src/backup_camera.cpp src/graphics_handler.cpp
 
 
 #CC = compiler used

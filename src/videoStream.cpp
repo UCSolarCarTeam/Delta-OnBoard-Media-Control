@@ -30,6 +30,7 @@ VideoStream::VideoStream()
 {
     m_bufferNumber = 1; 
     m_updateImage = false;
+    m_quit = false;
 
 }
 void VideoStream::init_setting(SDL_Rect input_rect) 
@@ -41,6 +42,7 @@ void VideoStream::update(GraphicsHandler *graphics_handler_)
 {
     if(imageReady())
     {
+        printf("bro, was the image ready? if u are here, it was\n");
         IplImage* img = NULL;
         img = getFrame();
         SDL_Surface* surface = SDL_CreateRGBSurfaceFrom((void*)img->imageData,
@@ -67,6 +69,7 @@ void VideoStream::ThreadFunction()
     VideoCapture cap(0);
     while (!m_quit)
     {
+        printf("hi\n");
         cap >> m_frame;
         switch(m_bufferNumber)
         {
@@ -85,6 +88,7 @@ void VideoStream::ThreadFunction()
         }
         m_updateImage = true;
     }
+    printf("thread stopped?\n");
 }
 
 bool VideoStream::imageReady()
@@ -94,6 +98,7 @@ bool VideoStream::imageReady()
 
 IplImage *VideoStream::getFrame()
 {
+    printf("Someone called get frame!\n");
     m_updateImage = false;
     switch(m_bufferNumber)
     {

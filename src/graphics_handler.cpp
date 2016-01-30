@@ -34,6 +34,9 @@ void GraphicsHandler::draw(SDL_Surface *surface, int x_pos, int y_pos) {
 }
 
 GraphicsHandler::GraphicsHandler(SDL_Renderer *renderer) {
+    if (renderer == NULL) {
+        printf("renderer is NULL\n");
+    }
     renderer_ = renderer;
 }
 

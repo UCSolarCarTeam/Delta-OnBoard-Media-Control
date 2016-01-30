@@ -22,9 +22,7 @@
  *
  *  For further contact, email <software@calgarysolarcar.ca>
  */
-
-#ifndef SONGPLAYER_H
-#define SONGPLAYER_H
+#pragma once
 
 #include <ao/ao.h>
 #include <mpg123.h>
@@ -85,5 +83,4 @@ class SongPlayer : public I_ThreadClass
         threadMode mode;
 };
 
-#endif /* SONGPLAYER_H */
 

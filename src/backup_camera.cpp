@@ -1,17 +1,22 @@
 #include "backup_camera.h"
 
+BackupCamera::BackupCamera(){
+}
 
-bool BackupCamera::init(SDL_Renderer *empty_renderer, SDL_Window *empty_window) {
+bool BackupCamera::init(SDL_Renderer **empty_renderer, SDL_Window **empty_window) {
     bool success = true;
     success = init_SDL(empty_renderer, empty_window) && success; 
 
-    //empty_renderer shouldn't be empty after init_SDL()
-    graphics_handler_ = new GraphicsHandler(empty_renderer); 
+    graphics_handler_ = new GraphicsHandler(*empty_renderer); 
 
+    camera_one_ = new VideoStream();
+    song_player_one_ = new SongPlayer();
+    song_player_one_->initSongPlayer();
+    music_bar_one_ = new MusicBar(song_player_one_);
     return success;
 }
 
-bool BackupCamera::init_SDL(SDL_Renderer *empty_renderer, SDL_Window *empty_window) {
+bool BackupCamera::init_SDL(SDL_Renderer **empty_renderer, SDL_Window **empty_window) {
     bool success = true;
     if (SDL_Init(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER)) < 0)
     {
@@ -20,7 +25,7 @@ bool BackupCamera::init_SDL(SDL_Renderer *empty_renderer, SDL_Window *empty_wind
     }
     else
     {
-        empty_window = SDL_CreateWindow("Video Application", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+        *empty_window = SDL_CreateWindow("Video Application", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
         if (empty_window == NULL)
         {
             printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
@@ -28,13 +33,13 @@ bool BackupCamera::init_SDL(SDL_Renderer *empty_renderer, SDL_Window *empty_wind
         }
         else
         {
-            empty_renderer = SDL_CreateRenderer(empty_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-            if (empty_renderer == NULL)
+            *empty_renderer = SDL_CreateRenderer(*empty_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+            if (*empty_renderer == NULL)
             {
                 printf("Renderer could not be created. SDL_Error: %s \n", SDL_GetError());
                 printf("Creating a software empty_renderer instead\n");
-                empty_renderer = SDL_CreateRenderer(empty_window, -1, SDL_RENDERER_SOFTWARE);
-                if (empty_renderer == NULL)
+                *empty_renderer = SDL_CreateRenderer(*empty_window, -1, SDL_RENDERER_SOFTWARE);
+                if (*empty_renderer == NULL)
                 {
                     printf("Renderer could not be created. SDL_Error: %s \n", SDL_GetError());
                     success = false;                    
@@ -45,14 +50,27 @@ bool BackupCamera::init_SDL(SDL_Renderer *empty_renderer, SDL_Window *empty_wind
     }
     return success;
 }
-void BackupCamera::init_screen_settings() {
-    //music_bar_one_->init_setting();
-    camera_one_->init_setting();
+void BackupCamera::init_screen_settings(SDL_Window *window) {
+    int w, h;
+    SDL_GetWindowSize(window, &w, &h);
 
+    SDL_Rect camera_one_rect;
+    camera_one_rect.x = 0;
+    camera_one_rect.y = 0;
+    camera_one_rect.w = w;
+    camera_one_rect.h = h - 50;
+    camera_one_->init_setting(camera_one_rect);
+    
+    SDL_Rect music_bar_one_rect;
+    music_bar_one_rect.x = 0;
+    music_bar_one_rect.y = h - 49;
+    music_bar_one_rect.w = w;
+    music_bar_one_rect.h = 49;
+    music_bar_one_->init_setting(music_bar_one_rect);
 }
 void BackupCamera::BackupCamera::update() {
     camera_one_->update(graphics_handler_);
-    //music_bar_one_->update(graphics_handler_);
+    music_bar_one_->update(graphics_handler_);
 }
 void BackupCamera::process_events() {
     SDL_Event event;
@@ -94,16 +112,24 @@ void BackupCamera::process_events() {
         }
 
 }
+
+void BackupCamera::start_threads() {
+    song_player_one_->StartThread();
+    camera_one_->StartThread();
+
+}
+
 void BackupCamera::processGPIO() {
 
 }
 
-void signalToQuit() {
-
+void BackupCamera::signalToQuit() {
+    camera_one_->signalToQuit();
+    song_player_one_->songQuit();
 }
 
 void BackupCamera::close() {
-
+    song_player_one_->closeSongPlayer();
 }
     
 

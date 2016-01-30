@@ -23,8 +23,7 @@
  *  For further contact, email <software@calgarysolarcar.ca>
  */
 
-#ifndef VIDEOSTREAM_H
-#define VIDEOSTREAM_H 
+#pragma once
 
 #include "threadClass.hpp"
 #include <cv.h>
@@ -58,4 +57,3 @@ class VideoStream : public I_ThreadClass
         IplImage *getFrame();
 };
 
-#endif
