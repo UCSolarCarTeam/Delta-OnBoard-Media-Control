@@ -43,6 +43,11 @@ MusicBar::MusicBar(SongPlayer *songPlayer)
 
 // ************** INITIALIZATION ***********
 
+void init_setting(SDL_Rect mainMusicBarRect)
+{
+    mainMusicBarRect_ = musicMusicBarRect;
+}
+
 void MusicBar::init()
 {
     drawMusicBar();
@@ -51,7 +56,7 @@ void MusicBar::init()
 
 void MusicBar::drawMusicBar()
 {
-    SDL_Rect musicBarRect = {0, 0, 1080, 64};
+    musicBarRect = {0, 0, 1080, 64};
     musicbarSurface = SDL_CreateRGBSurface(0, musicBarRect.w, musicBarRect.h, 32, 0, 0, 0, 0); 
 }
 
@@ -126,7 +131,7 @@ void MusicBar::updateSongName()
 
     TTF_SizeText(songNameFont, songName, &songNameRect.w, &songNameRect.h);
 
-    songNameRect.y = 64/2 - songNameRect.h/2;
+    songNameRect.y = mainMusicBarRect.y/2 - songNameRect.h/2;
     songNameSrcRect.h = songNameRect.h;
 
     drawSurface(songNameSurface, &songNameSrcRect, songNameRect, 0, 0, 0);
@@ -146,7 +151,7 @@ void MusicBar::updateSongTime()
 
     SDL_Rect songLengthTimeRect = {0, 4, 0, 0};
     SDL_Surface* songLengthTimeSurface = createTimeSurface(lengthTime, songLengthTimeRect);
-    songLengthTimeRect.x = 1080 - songLengthTimeRect.w;
+    songLengthTimeRect.x = musicbarRect.x - songLengthTimeRect.w;
 
     drawSurface(songLengthTimeSurface, NULL, songLengthTimeRect, 0, 0, 0);
 
@@ -156,14 +161,14 @@ void MusicBar::updateSongTime()
 void MusicBar::updateTimeBar(double songCurrentTime, double songLengthTime)
 {
     SDL_Surface* songTimeBGBarSurface = NULL;
-    SDL_Rect songTimeBGBarRect = {0, 0, 1080, 3};
+    SDL_Rect songTimeBGBarRect = {0, 0, musicbarRect.x, 3};
 
     if (drawSurface(songTimeBGBarSurface, NULL, songTimeBGBarRect, 0, 0, 0))
         fprintf(stderr, "Failed to draw songTimeBGBarSurface\n");
 
     SDL_Surface* songTimeBarSurface = NULL;
     double songTimePercent = songCurrentTime / songLengthTime;
-    SDL_Rect songTimeBarRect = {0, 0, 0 + int(songTimePercent*1080), 3};
+    SDL_Rect songTimeBarRect = {0, 0, 0 + int(songTimePercent*musicBarRect.x), 3};
 
     drawSurface(songTimeBarSurface, NULL, songTimeBarRect, 0, 162, 255);
 }
@@ -193,7 +198,7 @@ void MusicBar::updateVolumeBar()
     
 // ********* MAIN FUNCTIONS ***********
 
-void MusicBar::update()
+void MusicBar::update(GraphicsHandler *graphics_handler)
 { 
     SDL_FillRect(musicbarSurface, NULL, SDL_MapRGB(musicbarSurface->format,43,43,43)); 
     drawSongBar();
@@ -202,12 +207,16 @@ void MusicBar::update()
     updateSongName();
     updateSongTime();
     updateVolumeBar(); 
+     
+    graphics_handler_->draw(musicbarSurface, mainMusicBarRect_, false, false);
 }
 
+#if 0
 SDL_Surface* MusicBar::returnMusicBar()
 {
     return musicbarSurface;
 }
+#endif
 
 // ******** HELPER FUNCTIONS ***********
 

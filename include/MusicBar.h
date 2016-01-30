@@ -26,6 +26,7 @@
 #ifndef MUSICBAR_H
 #define MUSICBAR_H
 
+#include "graphics_handler.h"
 #include "SongPlayer.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
@@ -38,8 +39,11 @@ private:
         int mins;
         int secs;
     };
-   
+
+    SDL_Rect mainMusicBarRect_;
+
     SDL_Surface *musicbarSurface;
+    SDL_Rect musicbarRect;
     SongPlayer *musicPlayer;
     TTF_Font *songNameFont;
     TTF_Font *timeFont;
@@ -61,11 +65,13 @@ private:
     int drawSurface(SDL_Surface *surface, const SDL_Rect *srcRect, SDL_Rect& destRect, int r, int g, int b);
  
 public:
+
+    void init_setting(SDL_Rect mainMusicBarRect);
     
     MusicBar();
     MusicBar(SongPlayer *songPlayer);
-    void update();
-    SDL_Surface* returnMusicBar();
+    void update(GraphicsHandler *graphics_handler_);
+    //SDL_Surface* returnMusicBar();
 
 };
 #endif
