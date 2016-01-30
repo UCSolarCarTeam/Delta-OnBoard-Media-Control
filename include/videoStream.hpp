@@ -38,16 +38,14 @@ class VideoStream : public I_ThreadClass
     public:
         VideoStream();
         void signalToQuit();
-        IplImage *getFrame();
-        bool imageReady();
-        void init_setting();
+        void init_setting(SDL_Rect input_rect);
         void update(GraphicsHandler *graphics_handler_);
-
 
     protected:
         void ThreadFunction();
 
     private:
+        SDL_Rect video_rect_;
         Mat m_frame;
         bool m_updateImage;
         int m_bufferNumber;
@@ -56,6 +54,8 @@ class VideoStream : public I_ThreadClass
         IplImage m_threadImage3;
         bool m_quit;
 
+        bool imageReady();
+        IplImage *getFrame();
 };
 
 #endif

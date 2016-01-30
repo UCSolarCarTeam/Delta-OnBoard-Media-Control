@@ -32,9 +32,28 @@ VideoStream::VideoStream()
     m_updateImage = false;
 
 }
-void init_setting() 
+void VideoStream::init_setting(SDL_Rect input_rect) 
 {
-    //TODO
+    video_rect_ = input_rect;
+}
+
+void VideoStream::update(GraphicsHandler *graphics_handler_)
+{
+    if(imageReady())
+    {
+        IplImage* img = NULL;
+        img = getFrame();
+        SDL_Surface* surface = SDL_CreateRGBSurfaceFrom((void*)img->imageData,
+            img->width,
+            img->height,
+            img->depth * img->nChannels,
+            img->widthStep,
+            0xff0000, 0x00ff00, 0x0000ff, 0
+            );
+
+        graphics_handler_->draw(surface, video_rect_, false, true);
+        SDL_FreeSurface(surface);
+    }
 }
 
 void VideoStream::signalToQuit()
