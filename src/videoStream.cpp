@@ -32,6 +32,10 @@ VideoStream::VideoStream()
     m_updateImage = false;
 
 }
+void init_setting() 
+{
+    //TODO
+}
 
 void VideoStream::signalToQuit()
 {

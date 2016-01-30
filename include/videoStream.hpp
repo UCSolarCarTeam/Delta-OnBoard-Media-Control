@@ -29,6 +29,7 @@
 #include "threadClass.hpp"
 #include <cv.h>
 #include "opencv2/opencv.hpp"
+#include "graphics_handler.h"
 
 using namespace cv;
 
@@ -39,6 +40,8 @@ class VideoStream : public I_ThreadClass
         void signalToQuit();
         IplImage *getFrame();
         bool imageReady();
+        void init_setting();
+        void update(GraphicsHandler *graphics_handler_);
 
 
     protected:

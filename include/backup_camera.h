@@ -31,31 +31,36 @@ extern "C" {
 
 #include "MusicBar.h"
 #include "SongPlayer.h"
-#include "videoStream.hpp"
 #include "graphics_handler.h"
+#include "videoStream.hpp"
+
+
 
 
 class BackupCamera {
 
 
 public: 
+    BackupCamera();
+    void process_events();
     void update();
     void close();
-    bool init();
+    bool init(SDL_Renderer *empty_renderer, SDL_Window *empty_window);
+
 
 
 private:
 
-    
-    void init_SDL();
+    void signalToQuit(); 
+    bool init_SDL(SDL_Renderer *empty_renderer, SDL_Window *empty_window);
     void init_screen_settings();
-    void process_events();
+    void init_graphics_handler(SDL_Renderer *renderer);
+    void processGPIO();
 
-    SDL_Renderer *renderer_;
-    SDL_Window *window_;
-    GraphicsHandler graphics_handler_;
-
-    SongPlayer song_player_one_;
+    //SDL_Renderer *renderer_;
+    //SDL_Window *window_;
+    GraphicsHandler *graphics_handler_;
+    SongPlayer *song_player_one_;
 
     /** Displayable **/
     VideoStream *camera_one_; 

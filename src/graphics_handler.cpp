@@ -12,3 +12,7 @@ void GraphicsHandler::draw(SDL_Texture *texture, int x_pos, int y_pos) {
     SDL_RenderCopy(renderer_, texture, NULL, &texture_rect);
 }
 
+GraphicsHandler::GraphicsHandler(SDL_Renderer *renderer) {
+    renderer_ = renderer;
+}
+
