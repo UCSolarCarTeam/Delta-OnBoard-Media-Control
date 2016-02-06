@@ -83,41 +83,52 @@ WiringPiButtons::Button WiringPiButtons::getEvents()
             
             if (!digitalRead(TOGGLEPLAY))  
                 state = TOGGLEPLAY; 
+
+            if (!digitalRead(SPACE))
+                state = SPACE;
             break;
         case VOLUMEDOWN:
-            if (digitalRead(VOLUMEDOWN))
-            {
+            if (digitalRead(VOLUMEDOWN)) {
                 returnButton = VOLUMEDOWN;
                 state = RELEASED; 
             }
             break;
         case VOLUMEUP:
-            if (digitalRead(VOLUMEUP)) 
-            {
+            if (digitalRead(VOLUMEUP)) {
                 returnButton = VOLUMEUP;
                 state = RELEASED; 
             }
             break;
         case NEXT:
-            if (digitalRead(NEXT))
-            {
+            if (digitalRead(NEXT)) {
                 returnButton = NEXT;
                 state = RELEASED; 
             }
             break;
         case PREVIOUS:
-            if (digitalRead(PREVIOUS)) 
-            {
+            if (digitalRead(PREVIOUS)) {
                 returnButton = PREVIOUS;
                 state = RELEASED; 
             }
             break;
         case TOGGLEPLAY:
-            if (digitalRead(TOGGLEPLAY)) 
-            {
+            if (digitalRead(TOGGLEPLAY)) {
                 returnButton = TOGGLEPLAY;
                 state = RELEASED; 
             }
+            break;             
+        case SPACE:
+            if (digitalRead(SPACE)) {
+                returnButton = SPACE;
+                state = RELEASED;
+            }
+            break;
+        default:
+            //should not get here
+            printf("Problem in the WiringPiButton.cpp\n");
+            return RELEASED;
             break;
     }
+    printf("Problem in the WiringPiButton.cpp\n");
+    return RELEASED;
 }

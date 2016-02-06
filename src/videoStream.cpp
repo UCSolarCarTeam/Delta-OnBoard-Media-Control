@@ -42,7 +42,6 @@ bool VideoStream::init_setting(SDL_Rect input_rect, int input_device)
     } else {
         return true;
     }
-
 }
 
 bool VideoStream::update(GraphicsHandler *graphics_handler_)
@@ -76,7 +75,9 @@ void VideoStream::ThreadFunction()
 {
     while (!m_quit)
     {
-        cap >> m_frame;
+        if (!cap.read(m_frame)){
+            printf("cap.read returned false, camera probably disconected\n");
+        }
         switch(m_bufferNumber)
         {
             case 1:
@@ -112,5 +113,8 @@ IplImage *VideoStream::getFrame()
             return &m_threadImage2;
         case 3:
             return &m_threadImage3;
+        default:
+            //Shouldn't get here
+            return NULL;
     }
 }

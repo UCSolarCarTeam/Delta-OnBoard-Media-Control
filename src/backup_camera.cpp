@@ -9,9 +9,41 @@ bool BackupCamera::init(SDL_Renderer **empty_renderer, SDL_Window **empty_window
 
     camera_one_ = new VideoStream();
     song_player_one_ = new SongPlayer();
+
     song_player_one_->initSongPlayer();
     music_bar_one_ = new MusicBar(song_player_one_);
+
     return success;
+}
+
+void BackupCamera::init_screen_settings(SDL_Window *window) {
+    int w, h;
+    SDL_GetWindowSize(window, &w, &h);
+
+    SDL_Rect camera_one_rect;
+    camera_one_rect.x = 0;
+    camera_one_rect.y = 0;
+    camera_one_rect.w = w;
+    camera_one_rect.h = h - 50;
+    //video_device 0
+    camera_one_->init_setting(camera_one_rect, 0); 
+    
+    SDL_Rect music_bar_one_rect;
+    music_bar_one_rect.x = 0;
+    music_bar_one_rect.y = h - 49;
+    music_bar_one_rect.w = w;
+    music_bar_one_rect.h = 49;
+    music_bar_one_->init_setting(music_bar_one_rect);
+}
+
+void BackupCamera::init_graphics(SDL_Renderer *renderer) {
+    graphics_handler_ = new GraphicsHandler(renderer); 
+}
+
+//only returns true if camera updates
+bool BackupCamera::BackupCamera::update() {
+    music_bar_one_->update(graphics_handler_);
+    return camera_one_->update(graphics_handler_);
 }
 
 bool BackupCamera::init_SDL(SDL_Renderer **empty_renderer, SDL_Window **empty_window) {
@@ -49,37 +81,6 @@ bool BackupCamera::init_SDL(SDL_Renderer **empty_renderer, SDL_Window **empty_wi
     return success;
 }
 
-
-//
-void BackupCamera::init_screen_settings(SDL_Window *window) {
-    int w, h;
-    SDL_GetWindowSize(window, &w, &h);
-
-    SDL_Rect camera_one_rect;
-    camera_one_rect.x = 0;
-    camera_one_rect.y = 0;
-    camera_one_rect.w = w;
-    camera_one_rect.h = h - 50;
-    //video_device 0
-    camera_one_->init_setting(camera_one_rect, 0); 
-    
-    SDL_Rect music_bar_one_rect;
-    music_bar_one_rect.x = 0;
-    music_bar_one_rect.y = h - 49;
-    music_bar_one_rect.w = w;
-    music_bar_one_rect.h = 49;
-    music_bar_one_->init_setting(music_bar_one_rect);
-}
-
-void BackupCamera::init_graphics(SDL_Renderer *renderer) {
-    graphics_handler_ = new GraphicsHandler(renderer); 
-}
-
-//only returns true if camera updates
-bool BackupCamera::BackupCamera::update() {
-    music_bar_one_->update(graphics_handler_);
-    return camera_one_->update(graphics_handler_);
-}
 bool BackupCamera::process_events() {
     SDL_Event event;
     while (SDL_PollEvent(&event))

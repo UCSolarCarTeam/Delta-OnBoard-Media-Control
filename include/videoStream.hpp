@@ -44,18 +44,20 @@ class VideoStream : public I_ThreadClass
     protected:
         void ThreadFunction();
 
+    //TODO: old convention of m_ being member variable switch to tailing _. 
     private:
-        SDL_Rect video_rect_;
-        Mat m_frame;
-        bool m_updateImage;
-        int m_bufferNumber;
         IplImage m_threadImage1;
         IplImage m_threadImage2;
         IplImage m_threadImage3;
-        bool m_quit;
-
+        Mat m_frame;
+        SDL_Rect video_rect_;
         VideoCapture cap;
 
         bool imageReady();
+
+        bool m_quit;
+        bool m_updateImage;
+        bool no_device;
+        int m_bufferNumber;
 };
 
