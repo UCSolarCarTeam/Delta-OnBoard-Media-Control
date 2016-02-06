@@ -7,8 +7,6 @@ bool BackupCamera::init(SDL_Renderer **empty_renderer, SDL_Window **empty_window
     bool success = true;
     success = init_SDL(empty_renderer, empty_window) && success; 
 
-    graphics_handler_ = new GraphicsHandler(*empty_renderer); 
-
     camera_one_ = new VideoStream();
     song_player_one_ = new SongPlayer();
     song_player_one_->initSongPlayer();
@@ -50,6 +48,9 @@ bool BackupCamera::init_SDL(SDL_Renderer **empty_renderer, SDL_Window **empty_wi
     }
     return success;
 }
+
+
+//
 void BackupCamera::init_screen_settings(SDL_Window *window) {
     int w, h;
     SDL_GetWindowSize(window, &w, &h);
@@ -59,7 +60,8 @@ void BackupCamera::init_screen_settings(SDL_Window *window) {
     camera_one_rect.y = 0;
     camera_one_rect.w = w;
     camera_one_rect.h = h - 50;
-    camera_one_->init_setting(camera_one_rect);
+    //video_device 0
+    camera_one_->init_setting(camera_one_rect, 0); 
     
     SDL_Rect music_bar_one_rect;
     music_bar_one_rect.x = 0;
@@ -68,49 +70,55 @@ void BackupCamera::init_screen_settings(SDL_Window *window) {
     music_bar_one_rect.h = 49;
     music_bar_one_->init_setting(music_bar_one_rect);
 }
-void BackupCamera::BackupCamera::update() {
-    camera_one_->update(graphics_handler_);
-    music_bar_one_->update(graphics_handler_);
+
+void BackupCamera::init_graphics(SDL_Renderer *renderer) {
+    graphics_handler_ = new GraphicsHandler(renderer); 
 }
-void BackupCamera::process_events() {
+
+//only returns true if camera updates
+bool BackupCamera::BackupCamera::update() {
+    music_bar_one_->update(graphics_handler_);
+    return camera_one_->update(graphics_handler_);
+}
+bool BackupCamera::process_events() {
     SDL_Event event;
-        while (SDL_PollEvent(&event))
+    while (SDL_PollEvent(&event))
+    {
+        switch(event.type)
         {
-            switch(event.type)
-            {
-                case SDL_QUIT:
-                    printf("SDL_QUIT was called\n");
-                    signalToQuit();
-                    close();
-                    break;
+            case SDL_QUIT:
+                printf("SDL_QUIT was called\n");
+                signalToQuit();
+                return false;
+                break;
 
-                case SDL_KEYDOWN:
-                    switch(event.key.keysym.sym)
-                    {
-                        case SDLK_ESCAPE:
-                            printf("Esc was Pressed!\n");
-                            signalToQuit();
-                            close();
-                            break;
-                        case SDLK_LEFT:
-                            printf("Left arrow was Pressed!\n");
-                            song_player_one_->previousSong();
-                            break;
-                        case SDLK_RIGHT:
-                            printf("Right arrow was Pressed!\n");
-                            song_player_one_->nextSong();
-                            break;
-                        case SDLK_UP: song_player_one_->changeVolume(0.02); break;
-                        case SDLK_DOWN:
-                            song_player_one_->changeVolume(-0.02);
-                            break;
-                        case SDLK_SPACE:
-                            printf("Space was pressed!\n");
-                            song_player_one_->playPause();
-                    }
-            }
+            case SDL_KEYDOWN:
+                switch(event.key.keysym.sym)
+                {
+                    case SDLK_ESCAPE:
+                        printf("Esc was Pressed!\n");
+                        signalToQuit();
+                        return false;
+                        break;
+                    case SDLK_LEFT:
+                        printf("Left arrow was Pressed!\n");
+                        song_player_one_->previousSong();
+                        break;
+                    case SDLK_RIGHT:
+                        printf("Right arrow was Pressed!\n");
+                        song_player_one_->nextSong();
+                        break;
+                    case SDLK_UP: song_player_one_->changeVolume(0.02); break;
+                    case SDLK_DOWN:
+                        song_player_one_->changeVolume(-0.02);
+                        break;
+                    case SDLK_SPACE:
+                        printf("Space was pressed!\n");
+                        song_player_one_->playPause();
+                }
         }
-
+    }
+    return true;
 }
 
 void BackupCamera::start_threads() {
@@ -130,6 +138,8 @@ void BackupCamera::signalToQuit() {
 
 void BackupCamera::close() {
     song_player_one_->closeSongPlayer();
+    song_player_one_->WaitForThreadToExit();
+    camera_one_->WaitForThreadToExit();
 }
     
 

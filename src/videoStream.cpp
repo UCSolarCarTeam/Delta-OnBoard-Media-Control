@@ -33,16 +33,22 @@ VideoStream::VideoStream()
     m_quit = false;
 
 }
-void VideoStream::init_setting(SDL_Rect input_rect) 
+bool VideoStream::init_setting(SDL_Rect input_rect, int input_device) 
 {
     video_rect_ = input_rect;
+    cap = VideoCapture(input_device);
+    if (!cap.isOpened()) {
+        return false;
+    } else {
+        return true;
+    }
+
 }
 
-void VideoStream::update(GraphicsHandler *graphics_handler_)
+bool VideoStream::update(GraphicsHandler *graphics_handler_)
 {
     if(imageReady())
     {
-        printf("bro, was the image ready? if u are here, it was\n");
         IplImage* img = NULL;
         img = getFrame();
         SDL_Surface* surface = SDL_CreateRGBSurfaceFrom((void*)img->imageData,
@@ -55,7 +61,9 @@ void VideoStream::update(GraphicsHandler *graphics_handler_)
 
         graphics_handler_->draw(surface, video_rect_, false, true);
         SDL_FreeSurface(surface);
+        return true;
     }
+    return false;
 }
 
 void VideoStream::signalToQuit()
@@ -66,10 +74,8 @@ void VideoStream::signalToQuit()
 
 void VideoStream::ThreadFunction()
 {
-    VideoCapture cap(0);
     while (!m_quit)
     {
-        printf("hi\n");
         cap >> m_frame;
         switch(m_bufferNumber)
         {
@@ -88,7 +94,6 @@ void VideoStream::ThreadFunction()
         }
         m_updateImage = true;
     }
-    printf("thread stopped?\n");
 }
 
 bool VideoStream::imageReady()
@@ -98,7 +103,6 @@ bool VideoStream::imageReady()
 
 IplImage *VideoStream::getFrame()
 {
-    printf("Someone called get frame!\n");
     m_updateImage = false;
     switch(m_bufferNumber)
     {

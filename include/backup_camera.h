@@ -42,19 +42,19 @@ class BackupCamera {
 
 public: 
     BackupCamera();
-    void process_events();
-    void update();
+    bool process_events();
+    bool update();
     void close();
     bool init(SDL_Renderer **empty_renderer, SDL_Window **empty_window);
+    void init_graphics(SDL_Renderer *renderer);
+    void init_screen_settings(SDL_Window *window);
     void start_threads();
 
 
 
 private:
-
     void signalToQuit(); 
     bool init_SDL(SDL_Renderer **empty_renderer, SDL_Window **empty_window);
-    void init_screen_settings(SDL_Window *window);
     void init_graphics_handler(SDL_Renderer *renderer);
     void processGPIO();
 

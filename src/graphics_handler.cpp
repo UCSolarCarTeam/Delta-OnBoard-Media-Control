@@ -17,7 +17,7 @@ void GraphicsHandler::draw(SDL_Surface *surface, SDL_Rect surface_rect, bool ver
     }
 
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer_, surface);
-    SDL_RenderCopy(renderer_, texture, NULL, &surface_rect);
+    SDL_RenderCopyEx(renderer_, texture, NULL, &surface_rect, 0, NULL, flip);
     SDL_DestroyTexture(texture);
 }
 

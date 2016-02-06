@@ -14,18 +14,20 @@ int main()
     }
 
     if (renderer == NULL) {
-        printf("BRO IT WS NULL!!!!!!!!\n");
+        printf("Renderer is null\n");
     }
 
+    backup_camera->init_screen_settings(window);
+    backup_camera->init_graphics(renderer);
     backup_camera->start_threads();
 
-    while (1)
+    while (backup_camera->process_events())
     {
-        backup_camera->process_events();
-        backup_camera->update();
-        SDL_RenderPresent(renderer);
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-        SDL_RenderClear(renderer);
+        if (backup_camera->update()) {
+            SDL_RenderPresent(renderer);
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+            SDL_RenderClear(renderer);
+        }
     }
 
     backup_camera->close();
