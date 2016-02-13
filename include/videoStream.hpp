@@ -37,7 +37,7 @@ class VideoStream : public I_ThreadClass
     public:
         VideoStream();
         void signalToQuit();
-        bool init_setting(SDL_Rect input_rect, int input_device);
+        bool init_setting(SDL_Rect input_rect, int input_device, int camera_height, int camera_width);
         bool update(GraphicsHandler *graphics_handler_);
         IplImage *getFrame();
 

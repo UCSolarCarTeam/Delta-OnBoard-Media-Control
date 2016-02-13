@@ -33,10 +33,13 @@ VideoStream::VideoStream()
     m_quit = false;
 
 }
-bool VideoStream::init_setting(SDL_Rect input_rect, int input_device) 
+
+bool VideoStream::init_setting(SDL_Rect input_rect, int input_device, int camera_height, int camera_width) 
 {
     video_rect_ = input_rect;
     cap = VideoCapture(input_device);
+    cap.set(CV_CAP_PROP_FRAME_WIDTH,1920);
+    cap.set(CV_CAP_PROP_FRAME_HEIGHT,1080);
     if (!cap.isOpened()) {
         return false;
     } else {

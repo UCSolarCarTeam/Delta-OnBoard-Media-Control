@@ -17,7 +17,7 @@ int main()
         printf("Renderer is null\n");
     }
 
-    backup_camera->init_screen_settings(window);
+    backup_camera->init_screen_settings(window, 1, 720, 1366);
     backup_camera->init_graphics(renderer);
     backup_camera->start_threads();
 

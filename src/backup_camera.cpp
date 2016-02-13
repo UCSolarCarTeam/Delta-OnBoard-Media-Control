@@ -16,7 +16,8 @@ bool BackupCamera::init(SDL_Renderer **empty_renderer, SDL_Window **empty_window
     return success;
 }
 
-void BackupCamera::init_screen_settings(SDL_Window *window) {
+bool BackupCamera::init_screen_settings(SDL_Window *window, int camera_device, int camera_height, int camera_width) {
+    bool success = true;
     int w, h;
     SDL_GetWindowSize(window, &w, &h);
 
@@ -25,8 +26,7 @@ void BackupCamera::init_screen_settings(SDL_Window *window) {
     camera_one_rect.y = 0;
     camera_one_rect.w = w;
     camera_one_rect.h = h - 50;
-    //video_device 0
-    camera_one_->init_setting(camera_one_rect, 0); 
+    success = camera_one_->init_setting(camera_one_rect, camera_device, camera_height, camera_width) && success;
     
     SDL_Rect music_bar_one_rect;
     music_bar_one_rect.x = 0;
@@ -34,10 +34,18 @@ void BackupCamera::init_screen_settings(SDL_Window *window) {
     music_bar_one_rect.w = w;
     music_bar_one_rect.h = 49;
     music_bar_one_->init_setting(music_bar_one_rect);
+
+    return success;
 }
 
-void BackupCamera::init_graphics(SDL_Renderer *renderer) {
-    graphics_handler_ = new GraphicsHandler(renderer); 
+bool BackupCamera::init_graphics(SDL_Renderer *renderer) {
+    bool success = true;
+    if (renderer != NULL) {
+        graphics_handler_ = new GraphicsHandler(renderer); 
+    } else {
+        success = false;
+    }
+    return success;
 }
 
 //only returns true if camera updates

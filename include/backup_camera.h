@@ -43,15 +43,13 @@ class BackupCamera {
 public: 
     BackupCamera();
     bool init(SDL_Renderer **empty_renderer, SDL_Window **empty_window);
+    bool init_graphics(SDL_Renderer *renderer);
+    bool init_screen_settings(SDL_Window *window, int camera_device, int camera_height, int camera_width);
     bool process_events();
     bool update();
-    void init_graphics(SDL_Renderer *renderer);
-    void init_screen_settings(SDL_Window *window);
     void start_threads();
 
     void close();
-
-
 
 private:
     bool init_SDL(SDL_Renderer **empty_renderer, SDL_Window **empty_window);
