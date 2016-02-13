@@ -142,8 +142,8 @@ void MusicBar::updateSongTime()
 
     SDL_Rect songLengthTimeRect = {0, 4, 0, 0};
     SDL_Surface* songLengthTimeSurface = createTimeSurface(lengthTime, songLengthTimeRect);
-    songLengthTimeRect.x = musicBarRect.x - songLengthTimeRect.w;
-
+    songLengthTimeRect.x = musicBarRect.w - songLengthTimeRect.w;
+    
     drawSurface(songLengthTimeSurface, NULL, songLengthTimeRect, 0, 0, 0);
 
     updateTimeBar(songCurrentTime, songLengthTime);
@@ -213,8 +213,6 @@ SDL_Surface* MusicBar::createTimeSurface(timeValue& songTime, SDL_Rect& surfaceR
     else
         cSongTime = (std::to_string(songTime.mins) + ":" + std::to_string(songTime.secs)).c_str();
 
-    TTF_SizeText(timeFont, cSongTime, &surfaceRect.w, &surfaceRect.h);
-    
     SDL_Surface *songTimeSurface;
     SDL_Color songTimeColor = {255, 255, 255};
     
