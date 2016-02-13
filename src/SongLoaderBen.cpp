@@ -4,7 +4,7 @@ using namespace std;
 
 SongLoaderBen::SongLoaderBen()
 {
-    currentSongIndex = 0;
+    currentSongIndex; 
     string dir = string(".");
     checkLibrary = readSongNames(dir, files); 
     if (checkLibrary != false)
@@ -27,39 +27,27 @@ bool SongLoaderBen::previousSong()
 
 std::string SongLoaderBen::gotoNextSong()
 {
-    int fwrdTemp = currentSongIndex;
-    if(nextSong() == true)
+
+   // currentSongIndex = (currentSongIndex+1)%files.size();
+
+    currentSongIndex = currentSongIndex++; 
+    if(currentSongIndex-1 > files.size())
     {
-        if(currentSongIndex == files.size()-1)
-        {
-            fwrdTemp = 0;
-        }
-        else
-        {
-            fwrdTemp = currentSongIndex++;
-        }
-        return files[fwrdTemp];
-        currentSongIndex = fwrdTemp;
+        currentSongIndex = 0; 
     }
+    return files[currentSongIndex];
 }
 
 std::string SongLoaderBen::gotoPreviousSong()
 {
-    int backTemp = currentSongIndex;
-    if(previousSong() == true)
+    currentSongIndex = currentSongIndex--;
+    if(currentSongIndex < 0)
     {
-        if(currentSongIndex == 0)
-        {
-            backTemp = files.size()-1;
-        }
-        else
-        {
-            backTemp = currentSongIndex--;
-        }
-        return files[backTemp];
-        currentSongIndex = backTemp;
+        currentSongIndex = files.size()-1;
     }
+    return files[currentSongIndex];
 }
+
 
 std::string SongLoaderBen::currentSong()
 {
