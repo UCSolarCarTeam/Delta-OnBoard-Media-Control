@@ -122,7 +122,7 @@ void MusicBar::updateSongName()
 
     TTF_SizeText(songNameFont, songName, &songNameRect.w, &songNameRect.h);
 
-    songNameRect.y = musicBarRect.y/2 - songNameRect.h/2;
+    songNameRect.y = musicBarRect.h/2 - songNameRect.h/2;
     songNameSrcRect.h = songNameRect.h;
 
     drawSurface(songNameSurface, &songNameSrcRect, songNameRect, 0, 0, 0);
