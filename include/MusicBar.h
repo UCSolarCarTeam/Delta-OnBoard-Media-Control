@@ -70,7 +70,5 @@ public:
     MusicBar();
     MusicBar(SongPlayer *songPlayer);
     void update(GraphicsHandler *graphics_handler_);
-    //SDL_Surface* returnMusicBar();
-
 };
 #endif

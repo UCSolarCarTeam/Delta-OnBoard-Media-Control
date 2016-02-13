@@ -26,15 +26,6 @@
 #include "MusicBar.h"
 
 // ************ CONSTRUCTORS ****************
-
-// if no songs default constructor
-MusicBar::MusicBar()   
-{
-    init();
-    drawMusicBar();
-}
-
-// if there is songs call constructor
 MusicBar::MusicBar(SongPlayer *songPlayer)
 {
     musicPlayer = songPlayer; 
@@ -210,13 +201,6 @@ void MusicBar::update(GraphicsHandler *graphics_handler)
      
     graphics_handler->draw(musicbarSurface, mainMusicBarRect_, false, false);
 }
-
-#if 0
-SDL_Surface* MusicBar::returnMusicBar()
-{
-    return musicbarSurface;
-}
-#endif
 
 // ******** HELPER FUNCTIONS ***********
 
