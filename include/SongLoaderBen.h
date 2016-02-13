@@ -1,5 +1,4 @@
-#ifndef SONG_LOADER_H
-#define SONG_LOADER_H
+#pragma once
 #include <string>
 #include <stdlib.h>
 #include <dirent.h>
@@ -12,21 +11,24 @@
 #include <vector>
 #include <random>
 
-class SongLoader
+class SongLoaderBen
 {
 private:
+    std::vector<std::string> files =std::vector<std::string>();
     int currentSongIndex;
     bool checkLibrary;
     std::vector<std::string> songList;
     std::string CurrentSong;
-    int readSongNames();
-    int shuffleSongs();
+    bool readSongNames(std::string dir, std::vector<std::string> &files);
 
 public:
-    SongLoader();
-    std::string nextSong();
-    std::string previousSong();
-    std::string crrentSong();
+    SongLoaderBen();
+    bool nextSong();
+    bool previousSong();
+    std::string currentSong();
     bool songExists();
+    std::string gotoNextSong();
+    std::string gotoPreviousSong();
+    
+    int shuffleSongs();
 };
-#endif
