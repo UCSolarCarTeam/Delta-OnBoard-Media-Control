@@ -37,7 +37,8 @@ VideoStream::VideoStream()
 bool VideoStream::init_setting(SDL_Rect input_rect, int input_device, int camera_height, int camera_width) 
 {
     video_rect_ = input_rect;
-    cap = VideoCapture(input_device);
+    m_input_device = input_device;
+    cap = VideoCapture(m_input_device);
     cap.set(CV_CAP_PROP_FRAME_WIDTH,1920);
     cap.set(CV_CAP_PROP_FRAME_HEIGHT,1080);
     if (!cap.isOpened()) {
@@ -45,6 +46,8 @@ bool VideoStream::init_setting(SDL_Rect input_rect, int input_device, int camera
     } else {
         return true;
     }
+
+
 }
 
 bool VideoStream::update(GraphicsHandler *graphics_handler_)
@@ -73,14 +76,17 @@ void VideoStream::signalToQuit()
     m_quit = true;
 }
 
+void VideoStream::reboot_camera() {
+
+    cap = VideoCapture(0);
+}
+
 
 void VideoStream::ThreadFunction()
 {
     while (!m_quit)
     {
-        if (!cap.read(m_frame)){
-            printf("cap.read returned false, camera probably disconected\n");
-        }
+        cap.read(m_frame);
         switch(m_bufferNumber)
         {
             case 1:

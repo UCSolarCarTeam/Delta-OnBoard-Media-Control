@@ -40,6 +40,7 @@ class VideoStream : public I_ThreadClass
         bool init_setting(SDL_Rect input_rect, int input_device, int camera_height, int camera_width);
         bool update(GraphicsHandler *graphics_handler_);
         IplImage *getFrame();
+        void reboot_camera();
 
     protected:
         void ThreadFunction();
@@ -58,6 +59,7 @@ class VideoStream : public I_ThreadClass
         bool m_quit;
         bool m_updateImage;
         bool no_device;
+        int m_input_device;
         int m_bufferNumber;
 };
 

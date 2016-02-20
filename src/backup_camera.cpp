@@ -71,7 +71,7 @@ bool BackupCamera::init_SDL(SDL_Renderer **empty_renderer, SDL_Window **empty_wi
         }
         else
         {
-            *empty_renderer = SDL_CreateRenderer(*empty_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+            *empty_renderer = SDL_CreateRenderer(*empty_window, 0, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
             if (*empty_renderer == NULL)
             {
                 printf("Renderer could not be created. SDL_Error: %s \n", SDL_GetError());
@@ -123,6 +123,7 @@ bool BackupCamera::process_events() {
                         break;
                     case SDLK_SPACE:
                         printf("Space was pressed!\n");
+                        camera_one_->reboot_camera();
                         song_player_one_->playPause();
                 }
         }
