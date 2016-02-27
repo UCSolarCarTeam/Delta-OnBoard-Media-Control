@@ -155,11 +155,7 @@ int show_Camera()
         SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
         SDL_FreeSurface(surface);
         surface = NULL;
-        #ifdef RUNNINGONPI
-        SDL_RendererFlip flip = SDL_FLIP_VERTICAL;
-        #else
         SDL_RendererFlip flip = SDL_FLIP_HORIZONTAL;
-        #endif
         SDL_RenderCopyEx(renderer, texture, NULL, &videoRect ,0, NULL, flip);
         SDL_DestroyTexture(texture);
         return 1;
@@ -175,11 +171,7 @@ int showMusicBar()
         gordonMusic.update();
         surfaceBar = gordonMusic.returnMusicBar();
         SDL_Texture* textureMusicBar = SDL_CreateTextureFromSurface(renderer, surfaceBar);
-        #ifdef RUNNINGONPI
-        SDL_RendererFlip flip = SDL_RendererFlip((int)SDL_FLIP_HORIZONTAL | (int)SDL_FLIP_VERTICAL);
-        #else
         SDL_RendererFlip flip = SDL_FLIP_NONE;
-        #endif
         SDL_RenderCopyEx(renderer, textureMusicBar, NULL, &musicBarRect ,0, NULL, flip);
         SDL_DestroyTexture(textureMusicBar);
     }
@@ -311,11 +303,7 @@ int main(int argc, char* argv[])
 
         if (show_Camera())
         {
-            #ifdef RUNNINGONPI
-            SDL_RendererFlip flip = SDL_RendererFlip((int)SDL_FLIP_HORIZONTAL | (int)SDL_FLIP_VERTICAL);
-            #else
             SDL_RendererFlip flip = SDL_FLIP_NONE;
-            #endif
             showMusicBar();
             SDL_RenderPresent(renderer);
             SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
