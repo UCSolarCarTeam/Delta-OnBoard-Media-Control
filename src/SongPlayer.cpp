@@ -52,7 +52,11 @@ void SongPlayer::songQuit()
 
 int SongPlayer::initSongPlayer()
 {
-    return loader.libraryLoad();
+    int ret_val = loader.libraryLoad();
+    if (ret_val != 1)
+        loadSong((char*)loader.nextSong().c_str());
+    return ret_val;
+    
 }
 
 void SongPlayer::changeVolume(double change)

@@ -132,6 +132,8 @@ void MusicBar::updateSongTime()
 {
     songCurrentTime = musicPlayer->getCurrentTime(); 
     songLengthTime = musicPlayer->getSongLength(); 
+    printf("First call: songLengthTime: %d\n", songLengthTime);
+
     timeValue currentTime = {songCurrentTime / 60, songCurrentTime % 60};
     timeValue lengthTime = {songLengthTime / 60, songLengthTime % 60};
 
@@ -146,26 +148,28 @@ void MusicBar::updateSongTime()
     
     drawSurface(songLengthTimeSurface, NULL, songLengthTimeRect, 0, 0, 0);
 
-    double songTimePercent = songCurrentTime / songLengthTime;
+    printf("songCurrentTime:%d , songLengthTime:%d\n", songCurrentTime, songLengthTime);
+    double songTimePercent = (double)songCurrentTime / (double)songLengthTime;
+    printf("time percent is: %lf\n", songTimePercent);
 
     updateTimeBar(songTimePercent);
 }
 
 void MusicBar::updateTimeBar(double songTimePercent)
 {
+    printf("time percent is: %lf\n", songTimePercent);
     SDL_Surface* songTimeBGBarSurface = NULL;
     SDL_Rect songTimeBGBarRect = {0, 0, musicBarRect.w, 3};
 
     if (drawSurface(songTimeBGBarSurface, NULL, songTimeBGBarRect, 0, 0, 0))
         fprintf(stderr, "Failed to draw songTimeBGBarSurface\n");
 
-    #if 1
     SDL_Surface* songTimeBarSurface = NULL;
     int timeBarWidth = songTimePercent*musicBarRect.w;
     SDL_Rect songTimeBarRect = {0, 0, timeBarWidth, 3};
+    printf("time percent is: %d\n", timeBarWidth);
 
-    //drawSurface(songTimeBarSurface, NULL, songTimeBarRect, 0, 162, 255);
-    #endif
+    drawSurface(songTimeBarSurface, NULL, songTimeBarRect, 0, 162, 255);
 }
 
 

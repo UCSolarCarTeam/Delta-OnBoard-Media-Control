@@ -17,12 +17,14 @@ int main()
         printf("Renderer is null\n");
     }
 
-    backup_camera->init_screen_settings(window, 1, 720, 1366);
+    backup_camera->init_screen_settings(window, 0, 720, 1366);
     backup_camera->init_graphics(renderer);
+    printf("Starting threads\n");
     backup_camera->start_threads();
 
     while (backup_camera->process_events())
     {
+            printf("updating\n");
         if (backup_camera->update()) {
             SDL_RenderPresent(renderer);
             SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
