@@ -1,7 +1,5 @@
 #include "Gordon.h"
 
-class Gordon {
-
     Gordon() {}
 
     void notify_listeners() {
