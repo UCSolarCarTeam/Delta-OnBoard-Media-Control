@@ -1,6 +1,7 @@
 #include <vector>
+#pragma once
 
-class G_Observer {
+class I_gobserver {
 public:
    virtual void heard_something() = 0;
-}
+};
