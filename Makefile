@@ -1,5 +1,5 @@
 #OBJS = files to compile
-OBJS = src/main.cpp src/gordon.cpp src/ben.cpp 
+OBJS = src/main.cpp
 
 
 #CC = compiler used
