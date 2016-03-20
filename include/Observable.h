@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
 
+// Note: All classes that inherit Observable must have an Observer interface
+
 template <class T>
 class Observable {
 public:
