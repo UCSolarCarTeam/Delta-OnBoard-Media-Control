@@ -3,45 +3,36 @@
 SongLoader::SongLoader()
 {
     std::string dir = std::string(".");
-    check_library = read_song_names(dir, files);
-    if(check_library != false)
-    {
-        shuffle_songs();
-    }  
 }
 
-void SongLoader::notify_listeners()
+void SongLoader::notify_listeners(std::string song_path)
 {
     for(I_SongLoaderObserver*listener:listeners) 
     {
-        listener->current_song(std::string song_path);
+        listener->current_song(song_path)
     }
 }
 
 void SongLoader::next_song()
 {
     current_song_index = (current_song_index + 1)%files.size();
-    files[current_song_index];
-    notify_listeners();
+    notify_listeners(files[current_song_index]);
 }
 
 void SongLoader::previous_song()
 {
     current_song_index = (current_song_index - 1)%files.size();
-    files[current_song_index];
-    notify_listeners();
+    notify_listeners(files[current_song_index]);
 }
 
-std::string SongLoader::next_song_name()
+void SongLoader::next_song_name()
 {
-    return files[(current_song_index + 1)%files.size()];
-    notify_listeners();
+    notify_listeners(files[(current_song_index + 1)%files.size()]);
 }
 
-std::string SongLoader::previous_song_name()
+void SongLoader::previous_song_name()
 {
-    return files[(current_song_index - 1)%files.size()]
-    notify_listeners();
+    notify_listeners(files[(current_song_index - 1)%files.size()]);
 }
 
 void SongLoader::io_event(std::string io_command);
