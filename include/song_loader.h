@@ -27,14 +27,11 @@ private:
 public:
     SongLoader();
     bool song_exists();
-    std::string current_song();
-    std::string next_song();
     std::string next_song_name();
-    std::string previous_song();
     std::string previous_song_name();
-    std::string shuffle_songs();
-    void call_next_song(std::string io_command);
-    void call_previous_song(std::string io_command);
-    void show_next_song_name(std::string io_command);
-    void show_previous_song_name(std::string io_command);
+    void current_song();
+    void io_event(std::string io_command);
+    void next_song();
+    void previous_song();
+    void shuffle_songs();
 };
