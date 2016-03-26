@@ -9,5 +9,5 @@
 class I_Displayable 
 {
 public:
-    virtual SDL_Texture display(SDL_Renderer *renderer);
+    virtual SDL_Texture display(SDL_Renderer *renderer) = 0;
 };
