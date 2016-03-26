@@ -3,11 +3,5 @@
 class I_Displayable 
 {
 public:
-
-    I_Displayable() {};
-
-private:
-
-protected:
-
+    virtual void display();
 };
