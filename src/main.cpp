@@ -1,13 +1,6 @@
 #include "SDL.h"
 #include <vector>
 
-template <typename T>
-void add_displayable(T displayable) 
-{
-    displayables.push_back(displayable);
-}
-    
-
 int main() {
 
     SDL SDLObject;
@@ -41,10 +34,7 @@ int main() {
         //Clear screen
         SDL_RenderClear(SDLObject.get_Renderer());
 
-        for (displayable : displayables)
-        {
-            SDL_RenderCopy(SDLObject.get_Renderer(), texture.display(), NULL, NULL)
-        }
+        //SDL_RenderCopy(SDLObject.get_Renderer(), texture.display(), NULL, NULL);
 
         //Update screen
         SDL_RenderPresent(SDLObject.get_Renderer());
