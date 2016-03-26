@@ -21,23 +21,27 @@ void SongLoader::notify_listeners()
 std::string SongLoader::next_song()
 {
     return files[(current_song_index+1)%files.size()];
+    notify_listeners();
 }
 
 std::strig SongLoader::previous_song()
 {
     return files[(current_song_index-1)%files.size()];
+    notify_listeners();
 }
 
-std::string SongLoader::go_to_next_song()
+std::string SongLoader::next_song_name()
 {
    current_song_index = (current_song_index + 1)%files.size();
    return files[current_song_index];
+   notify_listeners();
 }
 
-std::string SongLoader::go_to_previous_song()
+std::string SongLoader::previous_song_name()
 {
     current_song_index = (current_song_index - 1)%files.size();
     return files(current_song_index);
+    notify_listeners();
 }
 
 std::string SongLoader::current_song()
@@ -46,6 +50,37 @@ std::string SongLoader::current_song()
     notify_listeners();
 }
 
+void SongLoader::call_next_song(std::string io_command)
+{
+    if(io_command == go_to_next_song)
+    {
+        next_song();
+    }
+}
+
+void SongLoader::call_previous_song(std::string io_command)
+{
+    if(io_command == go_to_previous_song)
+    {
+        previous_song();
+    }
+}
+
+void SongLoader::show_next_song_name(std::string io_command)
+{
+    if(io_command == show_next_song_name)
+    {
+        next_song_name()
+    }
+}
+
+void SongLoader::show_previous_song_name(std::string io_command)
+{
+    if(io_command == show_previous_song_name)
+    {
+       previous_song_name(); 
+    }
+}
 bool has_suffix(const string& s, const string& suffix)
 {
     return(s.size() >= suffix.size()) && equal(suffix.rbegin(), suffix.rend(), s.rbegin());
