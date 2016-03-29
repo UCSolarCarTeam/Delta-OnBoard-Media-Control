@@ -9,7 +9,7 @@ void SongLoader::notify_listeners(std::string song_path)
 {
     for(I_SongLoaderObserver*listener:listeners) 
     {
-        listener->current_song(song_path)
+        listener->current_song(song_path);
     }
 }
 
@@ -35,13 +35,13 @@ void SongLoader::previous_song_name()
     notify_listeners(files[(current_song_index - 1)%files.size()]);
 }
 
-void SongLoader::io_event(std::string io_command);
+void SongLoader::io_event(std::string io_command)
 {
-    if(io_command == next_song)
+    if(io_command == play_next_song)
     {
         next_song();
     }
-    if(io_command == previous_song)
+    if(io_command == play_previous_song)
     {
         previous_song();
     }
@@ -55,15 +55,15 @@ void SongLoader::io_event(std::string io_command);
     }
 }
 
-bool has_suffix(const string& s, const string& suffix)
+bool has_suffix(const std::string& s, const std::string& suffix)
 {
     return(s.size() >= suffix.size()) && equal(suffix.rbegin(), suffix.rend(), s.rbegin());
 }
 
-bool SongLoader::readSongNames(string dir, std::vector<string> &files)
+bool SongLoader::read_song_names(std::string dir, std::vector<std::string> &files)
 {
    DIR *dp; 
-   string filepath;
+   std::string filepath;
    dir = "/home/Music";
    struct dirent *dirp;
    if((dp  = opendir("/home/Music")) == NULL)
@@ -76,7 +76,7 @@ bool SongLoader::readSongNames(string dir, std::vector<string> &files)
         if(has_suffix(dirp->d_name, ".mp3"))
         {
              filepath = dir + "/" + dirp->d_name;
-             files.push_back(string(filepath));
+             files.push_back(std::string(filepath));
         }
    }
    closedir(dp);
