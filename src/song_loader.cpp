@@ -35,23 +35,21 @@ void SongLoader::previous_song_name()
     notify_listeners(files[(current_song_index - 1)%files.size()]);
 }
 
-void SongLoader::io_event(std::string io_command)
+void SongLoader::io_event(int io_command)
 {
-    if(io_command == play_next_song)
+    switch(io_command)
     {
-        next_song();
-    }
-    if(io_command == play_previous_song)
-    {
-        previous_song();
-    }
-    if(io_command == show_next_song_name)
-    {
-        next_song_name();
-    }
-    if(io_command == show_previous_song_name)
-    {
-        previous_song_name();
+        case 1:
+            next_song();
+
+        case 2:
+            previous_song();
+
+        case 3:
+            next_song_name();
+
+        case 4:
+            previous_song_name();
     }
 }
 
