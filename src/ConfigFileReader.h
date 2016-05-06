@@ -4,7 +4,6 @@
 #include <string>
 #include <unordered_map>
 #include <algorithm>
-//#include <locale>
 
 class ConfigFileReader 
 {
@@ -15,4 +14,3 @@ class ConfigFileReader
         std::ifstream iniFile;
         std::unordered_map<std::string, std::string> hashmap;
 };
-
