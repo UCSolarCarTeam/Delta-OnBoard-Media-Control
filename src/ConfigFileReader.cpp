@@ -1,10 +1,10 @@
 #include "ConfigFileReader.h"
-#define TEST false
+#define TEST true
 
 // To Compile:
 // g++ -std=c++11 ConfigFileReader.cpp
 
-#if TEST
+#if 0
 // For Testing
 int main (int argc, char *argv[])
 {
@@ -119,7 +119,7 @@ bool ConfigFileReader::getBoolean(std::string section, std::string key, bool def
 
 bool ConfigFileReader::isSection(std::string line)
 {
-    if (line[0] = '[' && line[line.length()-1] == ']')
+    if ((line[0] = '[') && (line[line.length()-1] == ']'))
         return true;
 
     return false;
