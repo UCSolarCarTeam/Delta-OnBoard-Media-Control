@@ -35,6 +35,10 @@ void SongLoader::previous_song_name()
     notify_listeners(files[(current_song_index - 1)%files.size()]);
 }
 
+void SongLoader::current_song()
+{
+    notify_listeners(files[(current_song_index)%files.size()]);
+}
 void SongLoader::io_event(int io_command)
 {
     switch(io_command)

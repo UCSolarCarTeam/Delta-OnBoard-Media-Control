@@ -1,0 +1,166 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BITS	include/SongPlayer.h	37;"	d
+Button	include/WiringPiButtons.hpp	/^      enum Button { SPACE = 29, VOLUMEDOWN = 25, VOLUMEUP = 24, NEXT  = 23, PREVIOUS = 22, TOGGLEPLAY = 21, RELEASED = 0};$/;"	g	class:WiringPiButtons
+CC	Makefile	/^CC = g++$/;"	m
+COMPILE_FLAGS	Makefile	/^COMPILE_FLAGS = -w -g -std=c++0x$/;"	m
+CurrentSong	include/SongLoader.h	/^    std::string CurrentSong;$/;"	m	class:SongLoader
+CurrentSong	include/SongLoaderBen.h	/^    std::string CurrentSong;$/;"	m	class:SongLoaderBen
+INCLUDE_FLAGS	Makefile	/^INCLUDE_FLAGS = -Ilib -Iinclude$/;"	m
+INT64_C	src/Main.cpp	35;"	d	file:
+I_THREADCLASS_H	include/threadClass.hpp	27;"	d
+I_ThreadClass	include/threadClass.hpp	/^    I_ThreadClass() { }$/;"	f	class:I_ThreadClass
+I_ThreadClass	include/threadClass.hpp	/^class I_ThreadClass$/;"	c
+LINK_FLAGS	Makefile	/^LINK_FLAGS = `sdl2-config --cflags` `sdl2-config --libs` `pkg-config opencv --cflags` `pkg-config opencv --libs` -lSDL2_image -lSDL2_ttf -ltiff -lao -lmpg123 -lwiringPi -pthread$/;"	m
+MAX_VOLUME	include/SongPlayer.h	/^        double MAX_VOLUME;$/;"	m	class:SongPlayer
+MUSICBAR_H	include/MusicBar.h	27;"	d
+MusicBar	include/MusicBar.h	/^class MusicBar$/;"	c
+MusicBar	src/MusicBar.cpp	/^MusicBar::MusicBar(SongPlayer *songPlayer)$/;"	f	class:MusicBar
+NEXT	include/SongPlayer.h	/^        enum threadMode { PLAY, NEXT, PREVIOUS, SHUFFLE, PAUSE};$/;"	e	enum:SongPlayer::threadMode
+NEXT	include/WiringPiButtons.hpp	/^      enum Button { SPACE = 29, VOLUMEDOWN = 25, VOLUMEUP = 24, NEXT  = 23, PREVIOUS = 22, TOGGLEPLAY = 21, RELEASED = 0};$/;"	e	enum:WiringPiButtons::Button
+OBJS	Makefile	/^OBJS = main.cpp src\/SongLoaderBen.cpp$/;"	m
+OUTPUT_NAME	Makefile	/^OUTPUT_NAME = BackupCamera$/;"	m
+PAUSE	include/SongPlayer.h	/^        enum threadMode { PLAY, NEXT, PREVIOUS, SHUFFLE, PAUSE};$/;"	e	enum:SongPlayer::threadMode
+PLAY	include/SongPlayer.h	/^        enum threadMode { PLAY, NEXT, PREVIOUS, SHUFFLE, PAUSE};$/;"	e	enum:SongPlayer::threadMode
+PREVIOUS	include/SongPlayer.h	/^        enum threadMode { PLAY, NEXT, PREVIOUS, SHUFFLE, PAUSE};$/;"	e	enum:SongPlayer::threadMode
+PREVIOUS	include/WiringPiButtons.hpp	/^      enum Button { SPACE = 29, VOLUMEDOWN = 25, VOLUMEUP = 24, NEXT  = 23, PREVIOUS = 22, TOGGLEPLAY = 21, RELEASED = 0};$/;"	e	enum:WiringPiButtons::Button
+RELEASED	include/WiringPiButtons.hpp	/^      enum Button { SPACE = 29, VOLUMEDOWN = 25, VOLUMEUP = 24, NEXT  = 23, PREVIOUS = 22, TOGGLEPLAY = 21, RELEASED = 0};$/;"	e	enum:WiringPiButtons::Button
+RUNNINGONINTEL	src/Main.cpp	47;"	d	file:
+RUNNINGONPI	src/Main.cpp	51;"	d	file:
+SCREEN_HEIGHT	src/Main.cpp	56;"	d	file:
+SCREEN_WIDTH	src/Main.cpp	57;"	d	file:
+SHUFFLE	include/SongPlayer.h	/^        enum threadMode { PLAY, NEXT, PREVIOUS, SHUFFLE, PAUSE};$/;"	e	enum:SongPlayer::threadMode
+SONGPLAYER_H	include/SongPlayer.h	27;"	d
+SONG_LOADER_H	include/SongLoader.h	27;"	d
+SPACE	include/WiringPiButtons.hpp	/^      enum Button { SPACE = 29, VOLUMEDOWN = 25, VOLUMEUP = 24, NEXT  = 23, PREVIOUS = 22, TOGGLEPLAY = 21, RELEASED = 0};$/;"	e	enum:WiringPiButtons::Button
+SongLoader	include/SongLoader.h	/^class SongLoader$/;"	c
+SongLoader	src/SongLoader.cpp	/^SongLoader::SongLoader()$/;"	f	class:SongLoader
+SongLoaderBen	include/SongLoaderBen.h	/^class SongLoaderBen$/;"	c
+SongLoaderBen	src/SongLoaderBen.cpp	/^SongLoaderBen::SongLoaderBen()$/;"	f	class:SongLoaderBen
+SongPlayer	include/SongPlayer.h	/^class SongPlayer : public I_ThreadClass$/;"	c
+SongPlayer	src/SongPlayer.cpp	/^SongPlayer::SongPlayer()$/;"	f	class:SongPlayer
+StartThread	include/threadClass.hpp	/^    bool StartThread()$/;"	f	class:I_ThreadClass
+TOGGLEPLAY	include/WiringPiButtons.hpp	/^      enum Button { SPACE = 29, VOLUMEDOWN = 25, VOLUMEUP = 24, NEXT  = 23, PREVIOUS = 22, TOGGLEPLAY = 21, RELEASED = 0};$/;"	e	enum:WiringPiButtons::Button
+ThreadFunction	src/SongPlayer.cpp	/^void SongPlayer::ThreadFunction()$/;"	f	class:SongPlayer
+ThreadFunction	src/videoStream.cpp	/^void VideoStream::ThreadFunction()$/;"	f	class:VideoStream
+ThreadReference	include/threadClass.hpp	/^    static void * ThreadReference(void * thread_id)$/;"	f	class:I_ThreadClass
+UINT64_C	src/Main.cpp	36;"	d	file:
+VIDEOSTREAM_H	include/videoStream.hpp	27;"	d
+VOLUMEDOWN	include/WiringPiButtons.hpp	/^      enum Button { SPACE = 29, VOLUMEDOWN = 25, VOLUMEUP = 24, NEXT  = 23, PREVIOUS = 22, TOGGLEPLAY = 21, RELEASED = 0};$/;"	e	enum:WiringPiButtons::Button
+VOLUMEUP	include/WiringPiButtons.hpp	/^      enum Button { SPACE = 29, VOLUMEDOWN = 25, VOLUMEUP = 24, NEXT  = 23, PREVIOUS = 22, TOGGLEPLAY = 21, RELEASED = 0};$/;"	e	enum:WiringPiButtons::Button
+VideoStream	include/videoStream.hpp	/^class VideoStream : public I_ThreadClass$/;"	c
+VideoStream	src/videoStream.cpp	/^VideoStream::VideoStream()$/;"	f	class:VideoStream
+WIRINGPIBUTTONS_HPP	include/WiringPiButtons.hpp	27;"	d
+WaitForThreadToExit	include/threadClass.hpp	/^    void WaitForThreadToExit()$/;"	f	class:I_ThreadClass
+WiringPiButtons	include/WiringPiButtons.hpp	/^class WiringPiButtons$/;"	c
+WiringPiButtons	src/WiringPiButtons.cpp	/^WiringPiButtons::WiringPiButtons()$/;"	f	class:WiringPiButtons
+backupCamera	src/Main.cpp	/^VideoStream backupCamera;$/;"	v
+buffer	include/SongPlayer.h	/^        unsigned char *buffer;$/;"	m	class:SongPlayer
+buffer_size	include/SongPlayer.h	/^        size_t buffer_size;$/;"	m	class:SongPlayer
+changeVolume	src/SongPlayer.cpp	/^void SongPlayer::changeVolume(double change)$/;"	f	class:SongPlayer
+channels	include/SongPlayer.h	/^        int channels, encoding;$/;"	m	class:SongPlayer
+checkLibrary	include/SongLoaderBen.h	/^    bool checkLibrary;$/;"	m	class:SongLoaderBen
+close	src/Main.cpp	/^void close()$/;"	f
+closeSongPlayer	src/SongPlayer.cpp	/^void SongPlayer::closeSongPlayer()$/;"	f	class:SongPlayer
+container	include/SongLoader.h	/^    std::vector<std::string> container;$/;"	m	class:SongLoader
+convertToString	src/MusicBar.cpp	/^std::string MusicBar::convertToString(int songIntTime)$/;"	f	class:MusicBar
+counter	include/SongLoader.h	/^    int counter, song, noLibrary; $/;"	m	class:SongLoader
+createGeometricSurface	src/MusicBar.cpp	/^void MusicBar::createGeometricSurface(SDL_Surface* geometricSurface, int surfaceWidth, int surfaceHeight, SDL_Rect surfaceLocation, int surfaceRed, int surfaceGreen, int surfaceBlue)$/;"	f	class:MusicBar
+currentSong	src/SongLoader.cpp	/^std::string SongLoader::currentSong()$/;"	f	class:SongLoader
+currentSong	src/SongLoaderBen.cpp	/^std::string SongLoaderBen::currentSong()$/;"	f	class:SongLoaderBen
+currentSong	src/SongPlayer.cpp	/^std::string SongPlayer::currentSong()$/;"	f	class:SongPlayer
+currentSongIndex	include/SongLoaderBen.h	/^    int currentSongIndex;$/;"	m	class:SongLoaderBen
+deltaTime	include/WiringPiButtons.hpp	/^      std::chrono::duration<double> deltaTime;$/;"	m	class:WiringPiButtons
+dev	include/SongPlayer.h	/^        ao_device *dev;$/;"	m	class:SongPlayer
+drawSongName	src/MusicBar.cpp	/^void MusicBar::drawSongName()$/;"	f	class:MusicBar
+drawSongTime	src/MusicBar.cpp	/^void MusicBar::drawSongTime()$/;"	f	class:MusicBar
+drawVolumeBar	src/MusicBar.cpp	/^void MusicBar::drawVolumeBar()$/;"	f	class:MusicBar
+encoding	include/SongPlayer.h	/^        int channels, encoding;$/;"	m	class:SongPlayer
+files	include/SongLoaderBen.h	/^    std::vector<std::string> files =std::vector<std::string>();$/;"	m	class:SongLoaderBen
+finish	Installer/MainInstaller.sh	/^function finish {$/;"	f
+format	include/SongPlayer.h	/^        ao_sample_format format;$/;"	m	class:SongPlayer
+freeMusic	src/SongPlayer.cpp	/^int SongPlayer::freeMusic()$/;"	f	class:SongPlayer
+getCurrentTime	src/SongPlayer.cpp	/^double SongPlayer::getCurrentTime()$/;"	f	class:SongPlayer
+getEvents	src/WiringPiButtons.cpp	/^WiringPiButtons::Button WiringPiButtons::getEvents()$/;"	f	class:WiringPiButtons
+getFrame	src/videoStream.cpp	/^IplImage *VideoStream::getFrame()$/;"	f	class:VideoStream
+getMaxVolume	src/SongPlayer.cpp	/^double SongPlayer::getMaxVolume()$/;"	f	class:SongPlayer
+getSongLength	src/SongPlayer.cpp	/^double SongPlayer::getSongLength()$/;"	f	class:SongPlayer
+getTimeInit	include/MusicBar.h	/^    bool getTimeInit;$/;"	m	class:MusicBar
+getVolume	src/SongPlayer.cpp	/^double SongPlayer::getVolume()$/;"	f	class:SongPlayer
+has_suffix	src/SongLoaderBen.cpp	/^bool has_suffix(const string& s, const string& suffix)$/;"	f
+imageReady	src/videoStream.cpp	/^bool VideoStream::imageReady()$/;"	f	class:VideoStream
+init	src/MusicBar.cpp	/^int MusicBar::init()$/;"	f	class:MusicBar
+initButton	src/WiringPiButtons.cpp	/^void WiringPiButtons::initButton(int buttonNumber)$/;"	f	class:WiringPiButtons
+initSongPlayer	src/SongPlayer.cpp	/^int SongPlayer::initSongPlayer()$/;"	f	class:SongPlayer
+init_CameraSettings	src/Main.cpp	/^bool init_CameraSettings()$/;"	f
+init_SDL	src/Main.cpp	/^bool init_SDL()$/;"	f
+libraryLoad	src/SongLoader.cpp	/^int SongLoader::libraryLoad()$/;"	f	class:SongLoader
+loadSong	src/SongPlayer.cpp	/^int SongPlayer::loadSong(char* songName)$/;"	f	class:SongPlayer
+loaded	include/SongPlayer.h	/^        bool loaded;$/;"	m	class:SongPlayer
+loader	include/SongPlayer.h	/^        SongLoader loader;$/;"	m	class:SongPlayer
+longSongNameInit	include/MusicBar.h	/^    bool longSongNameInit;$/;"	m	class:MusicBar
+longSongNameLocation	include/MusicBar.h	/^    int longSongNameLocation;$/;"	m	class:MusicBar
+mPlayer	include/MusicBar.h	/^    SongPlayer *mPlayer;$/;"	m	class:MusicBar
+m_bufferNumber	include/videoStream.hpp	/^        int m_bufferNumber;$/;"	m	class:VideoStream
+m_frame	include/videoStream.hpp	/^        Mat m_frame;$/;"	m	class:VideoStream
+m_quit	include/videoStream.hpp	/^        bool m_quit;$/;"	m	class:VideoStream
+m_threadImage1	include/videoStream.hpp	/^        IplImage m_threadImage1;$/;"	m	class:VideoStream
+m_threadImage2	include/videoStream.hpp	/^        IplImage m_threadImage2;$/;"	m	class:VideoStream
+m_threadImage3	include/videoStream.hpp	/^        IplImage m_threadImage3;$/;"	m	class:VideoStream
+m_updateImage	include/videoStream.hpp	/^        bool m_updateImage;$/;"	m	class:VideoStream
+main	main.cpp	/^int main () {$/;"	f
+main	src/Main.cpp	/^int main(int argc, char* argv[])$/;"	f
+mh	include/SongPlayer.h	/^        mpg123_handle *mh;$/;"	m	class:SongPlayer
+mode	include/SongPlayer.h	/^        threadMode mode;$/;"	m	class:SongPlayer
+musicBarRect	src/Main.cpp	/^SDL_Rect musicBarRect;$/;"	v
+musicPlayer	src/Main.cpp	/^MusicBar gordonMusic(&musicPlayer);$/;"	v
+musicPlayer	src/Main.cpp	/^SongPlayer musicPlayer;$/;"	v
+musicbarSurfaceHeight	include/MusicBar.h	/^    int musicbarSurfaceHeight;$/;"	m	class:MusicBar
+musicbarSurfaceWidth	include/MusicBar.h	/^    int musicbarSurfaceWidth;$/;"	m	class:MusicBar
+nextSong	src/SongLoader.cpp	/^std::string SongLoader::nextSong()$/;"	f	class:SongLoader
+nextSong	src/SongLoaderBen.cpp	/^std::string SongLoaderBen::nextSong()$/;"	f	class:SongLoaderBen
+nextSong	src/SongPlayer.cpp	/^int SongPlayer::nextSong()$/;"	f	class:SongPlayer
+noLibrary	include/SongLoader.h	/^    int counter, song, noLibrary; $/;"	m	class:SongLoader
+noSongs	src/Main.cpp	/^int noSongs;$/;"	v
+period_start	include/WiringPiButtons.hpp	/^      std::chrono::high_resolution_clock::time_point period_start;$/;"	m	class:WiringPiButtons
+playPause	src/SongPlayer.cpp	/^int SongPlayer::playPause()$/;"	f	class:SongPlayer
+previousSong	src/SongLoader.cpp	/^std::string SongLoader::previousSong()$/;"	f	class:SongLoader
+previousSong	src/SongLoaderBen.cpp	/^std::string SongLoaderBen::previousSong()$/;"	f	class:SongLoaderBen
+previousSong	src/SongPlayer.cpp	/^int SongPlayer::previousSong()$/;"	f	class:SongPlayer
+processEvents	src/Main.cpp	/^void processEvents()$/;"	f
+processGPIO	src/Main.cpp	/^void processGPIO(WiringPiButtons::Button button)$/;"	f
+quit	src/Main.cpp	/^int quit;$/;"	v
+quitSong	include/SongPlayer.h	/^        bool quitSong;$/;"	m	class:SongPlayer
+rate	include/SongPlayer.h	/^        long rate;$/;"	m	class:SongPlayer
+readSongNames	src/SongLoader.cpp	/^int SongLoader::readSongNames()$/;"	f	class:SongLoader
+readSongNames	src/SongLoaderBen.cpp	/^int SongLoaderBen::readSongNames(string dir, std::vector<string> &files)$/;"	f	class:SongLoaderBen
+renderer	src/Main.cpp	/^SDL_Renderer* renderer = NULL;$/;"	v
+returnButton	include/WiringPiButtons.hpp	/^      Button returnButton;$/;"	m	class:WiringPiButtons
+returnMusicBar	src/MusicBar.cpp	/^SDL_Surface* MusicBar::returnMusicBar()$/;"	f	class:MusicBar
+setFont	src/MusicBar.cpp	/^void MusicBar::setFont(TTF_Font **musicBarFont, int fontSize)$/;"	f	class:MusicBar
+showMusicBar	src/Main.cpp	/^int showMusicBar()$/;"	f
+show_Camera	src/Main.cpp	/^int show_Camera()$/;"	f
+shuffleSongNames	src/SongLoader.cpp	/^int SongLoader::shuffleSongNames()$/;"	f	class:SongLoader
+shuffleSongs	src/SongLoaderBen.cpp	/^int SongLoaderBen::shuffleSongs()$/;"	f	class:SongLoaderBen
+signalToQuit	src/Main.cpp	/^void signalToQuit()$/;"	f
+signalToQuit	src/videoStream.cpp	/^void VideoStream::signalToQuit()$/;"	f	class:VideoStream
+song	include/SongLoader.h	/^    int counter, song, noLibrary; $/;"	m	class:SongLoader
+songExists	src/SongLoaderBen.cpp	/^bool SongLoaderBen::songExists()$/;"	f	class:SongLoaderBen
+songList	include/SongLoaderBen.h	/^    std::vector<std::string> songList;$/;"	m	class:SongLoaderBen
+songNameFont	include/MusicBar.h	/^    TTF_Font *songNameFont;$/;"	m	class:MusicBar
+songQuit	src/SongPlayer.cpp	/^void SongPlayer::songQuit()$/;"	f	class:SongPlayer
+songTimeMark	include/MusicBar.h	/^    double songTimeMark;$/;"	m	class:MusicBar
+state	include/WiringPiButtons.hpp	/^      Button state;$/;"	m	class:WiringPiButtons
+surface	include/MusicBar.h	/^    SDL_Surface* surface;$/;"	m	class:MusicBar
+threadMode	include/SongPlayer.h	/^        enum threadMode { PLAY, NEXT, PREVIOUS, SHUFFLE, PAUSE};$/;"	g	class:SongPlayer
+thread_tracker	include/threadClass.hpp	/^    pthread_t thread_tracker;$/;"	m	class:I_ThreadClass
+timeFont	include/MusicBar.h	/^    TTF_Font *timeFont;$/;"	m	class:MusicBar
+update	src/MusicBar.cpp	/^void MusicBar::update()$/;"	f	class:MusicBar
+videoRect	src/Main.cpp	/^SDL_Rect videoRect;$/;"	v
+volume	include/SongPlayer.h	/^        double volume;$/;"	m	class:SongPlayer
+window	src/Main.cpp	/^SDL_Window* window = NULL;$/;"	v
+~I_ThreadClass	include/threadClass.hpp	/^    virtual ~I_ThreadClass() { }$/;"	f	class:I_ThreadClass
