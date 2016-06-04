@@ -18,7 +18,6 @@ int main() {
     SDL_Event e;
 
     //While application is running
-    
     while( !quit )
     {
         //Handle events on queue
@@ -34,6 +33,7 @@ int main() {
         //Clear screen
         SDL_RenderClear(SDLObject.get_Renderer());
 
+        //Render textures
         //SDL_RenderCopy(SDLObject.get_Renderer(), texture.display(), NULL, NULL);
 
         //Update screen

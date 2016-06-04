@@ -13,3 +13,4 @@ public:
 protected:
     std::vector<T*> listeners;
 };
+
