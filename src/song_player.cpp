@@ -1,14 +1,17 @@
 #include "song_player.h"
 #include "song_loader.h"
 
+SongLoader loader();
+std::string dir = "/home/Music";
+std::vector<std::string> files; 
 void SongPlayer::songQuit()
 {
     quitSong = true;
 }
 
-int SongPlayer::initSongPlayer()
+void SongPlayer::initSongPlayer()
 {
-    return loader.libraryLoad();
+    loader.read_song_names(dir,files); 
 }
 
 void SongPlayer::changeVolume(double change)

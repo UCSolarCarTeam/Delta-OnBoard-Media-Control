@@ -19,7 +19,7 @@ class SongPlayer : public Observable<I_SongPlayerObserver>
 
 public:
         void SongPLayer();
-        int initSongPlayer();
+        void initSongPlayer();
         void closeSongPlayer();
 
         /*Song Control*/

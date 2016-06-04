@@ -27,11 +27,12 @@ public:
         void shuffle_songs();
         void current_song();
         int libraryLoad();
+        bool read_song_names(std::string dir, std::vector<std::string> &files);
+
 
 private:
         std::vector<std::string> files = std::vector<std::string>();
         int current_song_index;
         bool check_library;
-        bool read_song_names(std::string dir, std::vector<std::string> &files);
         void notify_listeners(std::string song_path);
 };
