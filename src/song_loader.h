@@ -15,14 +15,14 @@
 class SongLoader: public Observable<I_SongLoaderObserver>//,public I_IoEventObserver 
 {
 private:
-    std::vector<std::string> files =std::vector<std::string>();
+    std::vector<std::string> files;
     int current_song_index;
     bool check_library;
-    bool read_song_names(std::string dir, std::vector<std::string> &files);
+    bool read_song_names(std::string dir);
     void notify_listeners(std::string song_path);
 
 public:
-    SongLoader();
+    SongLoader(std::string filepath);
     bool song_exists();
     void next_song_name();
     void previous_song_name();
