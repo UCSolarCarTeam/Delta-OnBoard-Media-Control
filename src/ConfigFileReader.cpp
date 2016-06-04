@@ -9,21 +9,29 @@
 int main (int argc, char *argv[])
 {
     std::cout << "Testing ConfigFileReader" << std::endl;
-    std::cout << "Loading File " << argv[1] << std::endl;
-    ConfigFileReader reader(argv[1]);
+    if (argv[1] == NULL)
+    {
+        std::cout << "Must have a ini file as a command line argument.\n";
+        std::cout << "Qutting...\n";
+        exit(1);
+    }
+    else
+    {
+        std::cout << "Loading File " << argv[1] << std::endl;
+        ConfigFileReader reader(argv[1]);
 
-    double a = reader.getDouble("DEFAULT", "GREET", 20);
-    std::cout << a << std::endl;
+        double a = reader.getDouble("DEFAULT", "GREET", 20);
+        std::cout << a << std::endl;
 
-    double b = reader.getDouble("SCREEN", "SCREEN_HEIGHT", 20);
-    std::cout << b << std::endl;
+        double b = reader.getDouble("SCREEN", "SCREEN_HEIGHT", 20);
+        std::cout << b << std::endl;
 
-    std::string c = reader.getString("SCREEN", "SCREEN_TITLE", "Title Screen");
-    std::cout << c << std::endl;
+        std::string c = reader.getString("SCREEN", "SCREEN_TITLE", "Title Screen");
+        std::cout << c << std::endl;
 
-    bool d = reader.getBoolean("SCREEN", "SCREEN_ENABLE", true);
-    std::cout << d << std::endl;
-
+        bool d = reader.getBoolean("SCREEN", "SCREEN_ENABLE", true);
+        std::cout << d << std::endl;
+    }
     return 0;
 }
 #endif
