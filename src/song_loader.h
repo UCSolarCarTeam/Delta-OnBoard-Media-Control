@@ -24,8 +24,8 @@ private:
 public:
     SongLoader(std::string filepath);
     bool song_exists();
-    void next_song_name();
-    void previous_song_name();
+    std::string next_song_name();
+    std::string previous_song_name();
     void io_event(int io_command);
     void next_song();
     void previous_song();

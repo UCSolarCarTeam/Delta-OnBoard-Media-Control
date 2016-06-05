@@ -25,14 +25,16 @@ void SongLoader::previous_song()
     notify_listeners(files[current_song_index]);
 }
 
-void SongLoader::next_song_name()
+std::string SongLoader::next_song_name()
 {
     notify_listeners(files[(current_song_index + 1)%files.size()]);
+    return files[(current_song_index + 1)%files.size()];
 }
 
-void SongLoader::previous_song_name()
+std::string SongLoader::previous_song_name()
 {
     notify_listeners(files[(current_song_index - 1)%files.size()]);
+    return files[(current_song_index - 1)%files.size()];
 }
 
 void SongLoader::io_event(int io_command)
