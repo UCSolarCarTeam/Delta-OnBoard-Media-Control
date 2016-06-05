@@ -4,11 +4,5 @@
 
 int main() 
 {
-
-    printf("Hello World\n"); 
-    SongLoader songloader = SongLoader();
-
-
-
     return 0;
 }
