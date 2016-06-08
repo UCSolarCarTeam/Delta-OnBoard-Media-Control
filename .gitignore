@@ -5,3 +5,5 @@ BackupCamera
 *.swp
 *un~
 libgmock.a
+run-tests
+
