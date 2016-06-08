@@ -27,7 +27,7 @@ TEST(SongLoaderTest, single_file) {
     delete mock_song_loader_listener;
 }
 TEST(SongLoaderTest, next_song_wraparound){
-     SongLoader *song_loader = new SongLoader("./test_resources/song_loader/singlefile");
+     SongLoader *song_loader = new SongLoader("./test_resources/song_loader/randomfiles");
      MockSongLoaderListener *mock_song_loader_listener = new MockSongLoaderListener();
 
      song_loader->add_listener(mock_song_loader_listener);
@@ -40,7 +40,7 @@ TEST(SongLoaderTest, next_song_wraparound){
     delete mock_song_loader_listener;
 }
 TEST(SongLoaderTest, previous_song_wraparound){
-     SongLoader *song_loader = new SongLoader("./test_resources/song_loader/singlefile");
+     SongLoader *song_loader = new SongLoader("./test_resources/song_loader/randomfiles");
      MockSongLoaderListener *mock_song_loader_listener = new MockSongLoaderListener();
 
     song_loader->add_listener(mock_song_loader_listener);
