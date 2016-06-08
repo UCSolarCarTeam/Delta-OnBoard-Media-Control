@@ -4,8 +4,8 @@ install:
     - sudo bash ./Installer/MainInstaller.sh
     - sudo bash ./Installer/AutoBootSetup.sh
     #- sudo apt-get install -qq g++-4.8
-    - sudo apt-get install g++ 
-    #- export CXX="g++-4.8"
+    - sudo apt-get install -y g++-4.8
+    - export CXX="g++-4.8"
     - git clone https://github.com/google/googletest.git
     - cd googletest
     - g++ -isystem googletest/include/ -Igoogletest -isystem googlemock/include/ -Igooglemock -pthread -c googlemock/src/gmock-all.cc
