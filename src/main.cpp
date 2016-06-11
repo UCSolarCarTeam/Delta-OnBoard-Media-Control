@@ -1,6 +1,7 @@
 #include "SDL.h"
 #include <vector>
 
+
 int main() {
 
     SDL SDLObject;
@@ -45,3 +46,16 @@ int main() {
 
     return 0;
 }
+
+
+//Will be used to initialize all objects and to get them to listen to each other. 
+int init() {
+
+
+    return 0;
+}
+
+
+
+
+
