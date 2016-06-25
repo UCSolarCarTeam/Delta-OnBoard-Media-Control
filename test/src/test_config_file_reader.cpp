@@ -47,3 +47,8 @@ TEST(ConfigFileReaderTest, getSectionSONGString) {
 	std::string actual = testReader.getString("SONG", "PATH", "Title Screen");
 	EXPECT_EQ(expected, actual);
 }
+TEST(ConfigFileReaderTest, getSectionSONGNoSpace) {
+	std::string expected = "someValue";
+	std::string actual = testReader.getString("SONG", "NOSPACE", "Title Screen");
+	EXPECT_EQ(expected, actual);
+}
