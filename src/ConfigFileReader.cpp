@@ -1,40 +1,4 @@
 #include "ConfigFileReader.h"
-#define TEST true
-
-// To Compile:
-// g++ -std=c++11 ConfigFileReader.cpp
-
-#if 0
-// For Testing
-int main (int argc, char *argv[])
-{
-    std::cout << "Testing ConfigFileReader" << std::endl;
-    if (argv[1] == NULL)
-    {
-        std::cout << "Must have a ini file as a command line argument.\n";
-        std::cout << "Qutting...\n";
-        exit(1);
-    }
-    else
-    {
-        std::cout << "Loading File " << argv[1] << std::endl;
-        ConfigFileReader reader(argv[1]);
-
-        double a = reader.getDouble("DEFAULT", "GREET", 20);
-        std::cout << a << std::endl;
-
-        double b = reader.getDouble("SCREEN", "SCREEN_HEIGHT", 20);
-        std::cout << b << std::endl;
-
-        std::string c = reader.getString("SCREEN", "SCREEN_TITLE", "Title Screen");
-        std::cout << c << std::endl;
-
-        bool d = reader.getBoolean("SCREEN", "SCREEN_ENABLE", true);
-        std::cout << d << std::endl;
-    }
-    return 0;
-}
-#endif
 
 ConfigFileReader::ConfigFileReader(const char* file_name)
 {
@@ -53,10 +17,9 @@ ConfigFileReader::ConfigFileReader(const char* file_name)
             lineCount++;
 
             size_t pos = line.find("=");
-            std::transform(line.begin(), line.end(),line.begin(), ::toupper);
+            //std::transform(line.begin(), line.end(),line.begin(), ::toupper);
             
-            key = line.substr(0,pos);
-            key.erase(std::remove(key.begin(), key.end(), ' '), key.end());  
+            key = line.substr(0,pos); key.erase(std::remove(key.begin(), key.end(), ' '), key.end());  
 
             value = line.substr(pos+1);
             value = trim(value);
@@ -73,13 +36,6 @@ ConfigFileReader::ConfigFileReader(const char* file_name)
         }
         iniFile.close();
     }
-
-    #if TEST
-    for (auto& n : hashmap)
-    {
-        std::cout << "Key: [" << n.first << "] Value: [" << n.second << "]" << std::endl;
-    }
-    #endif
 }
 
 
@@ -112,13 +68,17 @@ std::string ConfigFileReader::getString(std::string section, std::string key, st
 bool ConfigFileReader::getBoolean(std::string section, std::string key, bool default_value)
 {
     std::string newKey = makeKey(section, key);
+    std::string hashValue;
     std::cout << newKey << std::endl;
 
     if (hashmap.find(newKey) != hashmap.end())
     {
-        if (hashmap[newKey] == "YES" || hashmap[newKey] == "TRUE" || hashmap[newKey] == "1" || hashmap[newKey] == "ON")
+        hashValue = hashmap[newKey];
+        if (hashValue == "YES" || hashValue == "TRUE" || hashValue == "1" || hashValue == "ON" || 
+                hashValue == "yes" || hashValue == "true" || hashValue == "on")
             return true;
-        else if (hashmap[newKey] == "NO" || hashmap[newKey] == "FALSE" || hashmap[newKey] == "0" || hashmap[newKey] == "OFF")
+        else if (hashValue == "NO" || hashValue == "FALSE" || hashValue == "0" || hashValue == "OFF" || 
+                hashValue == "no" || hashValue == "false" || hashValue == "off")
             return false;
     }
         
