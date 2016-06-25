@@ -41,3 +41,9 @@ TEST(ConfigFileReaderTest, getBoolean) {
 	bool actual = testReader.getBoolean("SCREEN", "SCREEN_ENABLE", true);
 	EXPECT_EQ(expected, actual);
 }
+
+TEST(ConfigFileReaderTest, getSectionSONGString) {
+	std::string expected = "something";
+	std::string actual = testReader.getString("SONG", "PATH", "Title Screen");
+	EXPECT_EQ(expected, actual);
+}

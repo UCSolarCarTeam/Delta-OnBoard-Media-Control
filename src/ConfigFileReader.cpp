@@ -26,7 +26,7 @@ ConfigFileReader::ConfigFileReader(const char* file_name)
 
             if (isSection(line)) 
             {
-                section = line.substr(1, section.length()-1);
+                section = line.substr(1, line.length()-2);
             }
             else if (isValidKey(line))
             {
