@@ -35,7 +35,6 @@ function finish {
 	rm -rf $DIR/SDL2_ttf-2.0.12  || true
 	rm -rf $DIR/SDL2-2.0.3 || true
 	rm -rf $DIR/SDL2_mixer-2.0.0 || true
-	rm -rf $DIR/wiringPi/ || true
 	rm -rf $DIR/libmpg123/ || true
 }
 
@@ -119,8 +118,3 @@ make -j4
 make install -j4
 cd ..
 
-#install wiringPi
-git clone git://git.drogon.net/wiringPi
-cd wiringPi
-git pull origin
-./build
